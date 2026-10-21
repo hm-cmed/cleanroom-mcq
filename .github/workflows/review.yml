@@ -29,7 +29,7 @@ jobs:
       - name: 事実票を取得する
         uses: actions/checkout@v4
         with:
-          repository: hm-cmed/cleanroom-gi-facts
+          repository: hm-cmed/cleanroom-facts
           path: _facts
           token: ${{ secrets.FACTS_REPO_TOKEN || github.token }}
 

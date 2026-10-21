@@ -11,7 +11,10 @@ import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO = os.environ.get("GITHUB_REPOSITORY") or "hm-cmed/cleanroom-mcq"
-DEFAULT_FACTS = os.environ.get("FACTS_DIR") or os.path.join(ROOT, "..", "cleanroom-gi-facts")
+# 事実票のフォルダ。環境変数 FACTS_DIR がなければ、隣の cleanroom-facts（旧名 cleanroom-gi-facts）を使う
+DEFAULT_FACTS = os.environ.get("FACTS_DIR") or next(
+    (p for p in (os.path.join(ROOT, "..", "cleanroom-facts"), os.path.join(ROOT, "..", "cleanroom-gi-facts")) if os.path.isdir(p)),
+    os.path.join(ROOT, "..", "cleanroom-facts"))
 # 事実票に data/domains.yaml がないときに使う領域名
 FALLBACK_DOMAINS = {
     "HP": "H. pylori関連疾患", "UG": "上部消化管出血", "ES": "食道", "GD": "胃・十二指腸",

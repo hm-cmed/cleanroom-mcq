@@ -2,7 +2,7 @@
 # 書き方は README の「問題の書き方」を参照。
 #   ask: true  → 「正しいのはどれか」（truth: true の選択肢が正答。1つだけ）
 #   ask: false → 「誤っているのはどれか」（truth: false の選択肢が正答。1つだけ）
-#   各選択肢の fact は、その選択肢の正誤を決める事実カードのID（cleanroom-gi-facts）。
+#   各選択肢の fact は、その選択肢の正誤を決める事実カードのID（cleanroom-facts）。
 #   解説は、ビルド時に事実カードの主張文から自動で作る（ここには書かない）。
 #   status: draft（監修前） / approved（監修済み） / retired（廃止）。approved は人間だけが付ける。
 

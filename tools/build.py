@@ -1,6 +1,6 @@
 """問題ファイル（items/*.yaml）を事実票と照合し、ブラウザ用の data/questions.js を作る。
 
-    python tools/build.py                       # 事実票は ../cleanroom-gi-facts を使う
+    python tools/build.py                       # 事実票は ../cleanroom-facts を使う
     python tools/build.py --facts <事実票のフォルダ>
 
 照合で「エラー」があれば data/questions.js は作らず、終了コード 1 で止まる。
@@ -178,7 +178,7 @@ def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None, dom
 def main() -> int:
     ap = argparse.ArgumentParser(description="問題を事実票と照合し、data/questions.js を作る")
     ap.add_argument("--facts", default=DEFAULT_FACTS,
-                    help="事実票レポジトリのフォルダ（既定: ../cleanroom-gi-facts。環境変数 FACTS_DIR でも指定できる）")
+                    help="事実票レポジトリのフォルダ（既定: ../cleanroom-facts。環境変数 FACTS_DIR でも指定できる）")
     args = ap.parse_args()
     facts_dir = os.path.join(args.facts, "data", "facts")
     if not os.path.isdir(facts_dir):

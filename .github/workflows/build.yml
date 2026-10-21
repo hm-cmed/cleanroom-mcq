@@ -1,6 +1,6 @@
 name: 問題データの更新
 
-# 事実票（hm-cmed/cleanroom-gi-facts）の最新版と照合して data/questions.js と監修ページを作り直す。
+# 事実票（hm-cmed/cleanroom-facts）の最新版と照合して data/questions.js と監修ページを作り直す。
 # - 事実票の監修が反映されたとき（事実票側から通知が来たとき）
 # - 毎日 4:00（日本時間）
 # - 問題ファイル（items/）やツールを変更したとき
@@ -37,7 +37,7 @@ jobs:
       - name: 事実票を取得する
         uses: actions/checkout@v4
         with:
-          repository: hm-cmed/cleanroom-gi-facts
+          repository: hm-cmed/cleanroom-facts
           path: _facts
           token: ${{ secrets.FACTS_REPO_TOKEN || github.token }}
 

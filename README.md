@@ -13,7 +13,7 @@
 
 問題は、教科書やガイドラインの文章を写さずに作ります。
 
-1. 論文・ガイドラインから事実と数値だけを取り出し、自分の言葉で「事実カード」に書く（[cleanroom-gi-facts](https://github.com/hm-cmed/cleanroom-gi-facts)）。出典の実在とライセンスを API で照合する。
+1. 論文・ガイドラインから事実と数値だけを取り出し、自分の言葉で「事実カード」に書く（[cleanroom-facts](https://github.com/hm-cmed/cleanroom-facts)）。出典の実在とライセンスを API で照合する。
 2. 問題の各選択肢に、その正誤を決める事実カードを1枚ずつ対応させる。
 3. `tools/build.py` が、選択肢と事実カードを機械的に突き合わせる（カードの有無・廃止・出典照合の状態・数値の一致）。
 4. 専門医が監修し、承認した問題だけを「監修済み」として公開する。
@@ -57,7 +57,7 @@
 事実票のレポジトリを隣に置いて実行します（Windows の PowerShell）。
 
 ```powershell
-git clone https://github.com/hm-cmed/cleanroom-gi-facts ..\cleanroom-gi-facts
+git clone https://github.com/hm-cmed/cleanroom-facts ..\cleanroom-facts
 pip install pyyaml
 python tools\build.py
 ```
@@ -90,9 +90,9 @@ python tools\build.py
 1. **サイトの公開**：このレポジトリの Settings → Pages → Build and deployment の Source を「GitHub Actions」にする。
 2. **事実票を読むためのトークン**（事実票が非公開レポジトリの間は必要）：
    1. GitHub 右上のアイコン → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token。
-   2. Repository access で `cleanroom-gi-facts` と `cleanroom-mcq` を選び、Permissions の Contents を「Read and write」にして作成する。
+   2. Repository access で `cleanroom-facts` と `cleanroom-mcq` を選び、Permissions の Contents を「Read and write」にして作成する。
    3. できたトークンを、`cleanroom-mcq` の Settings → Secrets and variables → Actions に `FACTS_REPO_TOKEN` という名前で登録する。
-   4. 同じトークンを、`cleanroom-gi-facts` の同じ場所に `MCQ_DISPATCH_TOKEN` という名前で登録する（事実票の監修が反映されたとき、すぐに問題サイトへ知らせるため。登録しなくても毎日の自動更新で反映されます）。
+   4. 同じトークンを、`cleanroom-facts` の同じ場所に `MCQ_DISPATCH_TOKEN` という名前で登録する（事実票の監修が反映されたとき、すぐに問題サイトへ知らせるため。登録しなくても毎日の自動更新で反映されます）。
    5. トークンには有効期限があります。期限が切れたら作り直して登録し直してください。
 
 事実票を公開レポジトリにした場合は、2. の `FACTS_REPO_TOKEN` は不要です。
