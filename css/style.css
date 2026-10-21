@@ -92,6 +92,8 @@ legend { font-weight: 700; margin-bottom: 6px; padding: 0; }
 .row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 12px; }
 .field { display: flex; flex-direction: column; gap: 6px; font-weight: 700; }
 .field .radio { font-weight: 400; }
+input[type="number"] { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); width: 120px; }
+.plan { margin-top: 12px; }
 select { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); min-width: 140px; }
 input[type="checkbox"], input[type="radio"] { width: 18px; height: 18px; accent-color: var(--accent); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

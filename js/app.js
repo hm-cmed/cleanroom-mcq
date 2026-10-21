@@ -13,6 +13,9 @@
   const FORMAT = "crmcq-session";
   const ITEMS = (D.items || []).filter((it) => it.status === "approved" || (C.showDrafts && it.status === "draft"));
   const BY_ID = new Map(ITEMS.map((it) => [it.id, it]));
+  const CUR = D.curriculum || { blueprint: [], core: [] };
+  const LEVEL_W = (CUR.level_weights) || { a: 3, b: 2, c: 1 };
+  const PROFILES = Array.isArray(C.gradeProfiles) && C.gradeProfiles.length ? C.gradeProfiles : [{ id: "all", label: "指定なし", core: 0.5 }];
   const DOMAIN_ORDER = Object.keys(D.domains || {});
   const app = document.getElementById("app");
 
@@ -123,8 +126,19 @@
       started: typeof src.started === "string" ? src.started.slice(0, 40) : now(),
       updated: now(),
       settings: { feedback: st.feedback === "end" ? "end" : "each", shuffle: st.shuffle !== false },
+      plan: cleanPlan(src.plan),
       order, perm, answers, pos,
       finished: src.finished === true && order.every((id) => answers[id])
+    };
+  }
+
+  function cleanPlan(p) {
+    if (!p || typeof p !== "object" || !Array.isArray(p.rows)) return null;
+    const str = (v, n) => (typeof v === "string" ? v.slice(0, n) : "");
+    return {
+      label: str(p.label, 40),
+      core: Math.max(0, Math.min(1, Number(p.core) || 0)),
+      rows: p.rows.slice(0, 60).map((r) => ({ part: str(r && r.part, 20), label: str(r && r.label, 80), n: Math.max(0, Math.min(999, Number.parseInt(r && r.n, 10) || 0)) }))
     };
   }
 
@@ -173,6 +187,78 @@
   }
   const saveJson = (s) => download(`5択ドリル_再開用_${stamp()}.json`, sessionJson(s), "application/json");
   const saveCsv = (s) => download(`5択ドリル_成績_${stamp()}.csv`, sessionCsv(s), "text/csv;charset=utf-8");
+
+  /* ---------- 学年に合わせた問題セット ---------- */
+  // 重みに比例して n 問を区分に割り当てる（最大剰余法）。問題が足りない区分の分は、ほかの区分に回す。
+  function allocate(strata, n, available) {
+    const out = new Map();
+    let remaining = n;
+    let active = strata.filter((s) => s.weight > 0 && (available.get(s.id) || 0) > 0);
+    while (remaining > 0 && active.length) {
+      const total = active.reduce((a, s) => a + s.weight, 0);
+      const quota = active.map((s) => ({ s, q: (s.weight / total) * remaining }));
+      let given = 0;
+      quota.forEach((x) => { x.n = Math.floor(x.q); given += x.n; });
+      quota.sort((a, b) => (b.q - b.n) - (a.q - a.n));
+      for (let i = 0; given < remaining && i < quota.length; i++, given++) quota[i].n += 1;
+      let spill = 0;
+      for (const x of quota) {
+        const room = (available.get(x.s.id) || 0) - (out.get(x.s.id) || 0);
+        const take = Math.min(x.n, room);
+        if (take > 0) out.set(x.s.id, (out.get(x.s.id) || 0) + take);
+        spill += x.n - take;
+      }
+      remaining = spill;
+      active = active.filter((s) => (available.get(s.id) || 0) - (out.get(s.id) || 0) > 0);
+    }
+    return out;
+  }
+  // 区分の中から、重みつきでランダムに k 問選ぶ
+  function weightedPick(ids, k, weightOf) {
+    const pool = ids.slice();
+    const picked = [];
+    while (picked.length < k && pool.length) {
+      const total = pool.reduce((a, id) => a + weightOf(id), 0);
+      let r = (crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296) * total;
+      let i = 0;
+      for (; i < pool.length - 1; i++) { r -= weightOf(pool[i]); if (r < 0) break; }
+      picked.push(pool.splice(i, 1)[0]);
+    }
+    return picked;
+  }
+  function makePlan(profile, n) {
+    const used = new Set();
+    const rows = [];
+    const ids = [];
+    const part = (label, strata, key, count, weightOf) => {
+      if (count <= 0) return;
+      const groups = new Map();
+      for (const it of ITEMS) {
+        if (!it[key] || used.has(it.id)) continue;
+        if (!groups.has(it[key])) groups.set(it[key], []);
+        groups.get(it[key]).push(it.id);
+      }
+      const avail = new Map([...groups].map(([k, v]) => [k, v.length]));
+      const alloc = allocate(strata, count, avail);
+      for (const s of strata) {
+        const k = alloc.get(s.id) || 0;
+        if (!k) continue;
+        const pick = weightedPick(groups.get(s.id), k, weightOf);
+        pick.forEach((id) => used.add(id));
+        ids.push(...pick);
+        rows.push({ part: label, label: s.label, n: pick.length });
+      }
+    };
+    const core = Math.max(0, Math.min(1, Number(profile.core) || 0));
+    const nCore = Math.round(n * core);
+    part("コアカリ", CUR.core || [], "cc", nCore, (id) => (BY_ID.get(id).basic ? 2 : 1));
+    part("ブループリント", CUR.blueprint || [], "bp", n - ids.length, (id) => LEVEL_W[BY_ID.get(id).level] || 1);
+    if (ids.length < n) {   // どちらにも分類できない問題で埋める
+      const rest = shuffle(ITEMS.filter((it) => !used.has(it.id)).map((it) => it.id)).slice(0, n - ids.length);
+      if (rest.length) { ids.push(...rest); rows.push({ part: "その他", label: "分類外の問題", n: rest.length }); }
+    }
+    return { label: profile.label, core, rows, ids };
+  }
 
   /* ---------- 共通の部品 ---------- */
   function draftNotice() {
@@ -235,6 +321,46 @@
       location.hash = "#/quiz";
     }
 
+    // 学年に合わせた「おまかせ出題」
+    const gradeSel = h("select", { id: "grade" }, PROFILES.map((p, i) => h("option", { value: i, text: p.label, selected: i === PROFILES.length - 2 || null })));
+    const nInput = h("input", { type: "number", id: "planN", min: 1, max: ITEMS.length, value: Math.min(20, ITEMS.length), inputmode: "numeric" });
+    const planFb = h("select", { id: "planFb" }, h("option", { value: "each", text: "1問ごと" }), h("option", { value: "end", text: "最後にまとめて" }));
+    const planBox = h("div", { class: "plan", "aria-live": "polite" });
+    let plan = null;
+    function preview() {
+      const n = Math.max(1, Math.min(ITEMS.length, Number.parseInt(nInput.value, 10) || 0));
+      nInput.value = n;
+      const prof = PROFILES[Number(gradeSel.value)] || PROFILES[0];
+      plan = makePlan(prof, n);
+      const coreN = plan.rows.filter((r) => r.part === "コアカリ").reduce((a, r) => a + r.n, 0);
+      const bpN = plan.rows.filter((r) => r.part === "ブループリント").reduce((a, r) => a + r.n, 0);
+      planBox.replaceChildren(
+        h("p", { text: `${prof.label}：モデル・コア・カリキュラムに沿って ${coreN}問、医師国家試験ブループリントに沿って ${bpN}問` + (plan.ids.length < n ? `（問題が足りないため ${plan.ids.length}問）` : "") }),
+        h("div", { class: "table-wrap" }, h("table", {},
+          h("thead", {}, h("tr", {}, h("th", { text: "基準" }), h("th", { text: "区分" }), h("th", { text: "問題数" }))),
+          h("tbody", {}, plan.rows.map((r) => h("tr", {}, h("td", { text: r.part }), h("td", { text: r.label }), h("td", { class: "num", text: r.n })))))),
+        h("div", { class: "actions" }, button("この内容で始める", () => {
+          const sh = true;
+          const order = shuffle(plan.ids);
+          S = { v: 1, id: stamp(), started: now(), updated: now(),
+            settings: { feedback: planFb.value === "end" ? "end" : "each", shuffle: sh },
+            plan: { label: plan.label, core: plan.core, rows: plan.rows },
+            order, perm: Object.fromEntries(order.map((id) => [id, shuffle([0, 1, 2, 3, 4])])),
+            answers: {}, pos: 0, finished: false };
+          store.save(S);
+          location.hash = "#/quiz";
+        }, "btn primary big"), button("選び直す", preview)));
+    }
+    const planCard = h("section", { class: "card" },
+      h("h2", { text: "学年に合わせて出題する（おまかせ）" }),
+      h("p", { class: "muted", text: "1〜4年生はモデル・コア・カリキュラム、5年生以上は医師国家試験ブループリントの配分に近づくように、問題を自動で選びます。" }),
+      h("div", { class: "row" },
+        h("label", { class: "field" }, "学年", gradeSel),
+        h("label", { class: "field" }, "問題数", nInput),
+        h("label", { class: "field" }, "解説", planFb)),
+      h("div", { class: "actions" }, button("問題セットを作る", preview, "btn primary")),
+      planBox);
+
     const fileInput = h("input", { type: "file", accept: ".json,application/json", class: "visually-hidden", id: "resumeFile" });
     const fileMsg = h("p", { class: "error", role: "alert" });
     fileInput.addEventListener("change", () => {
@@ -271,8 +397,9 @@
         h("p", { class: "lead small", text: "解答の記録はこのブラウザの中だけに保存され、外部には送られません。途中でやめるときは、成績と再開用のファイルを保存できます。" })),
       draftNotice(),
       resume,
+      planCard,
       h("section", { class: "card" },
-        h("h2", { text: S && !S.finished ? "新しく始める" : "出題の設定" }),
+        h("h2", { text: "領域と問題数を自分で選ぶ" }),
         h("fieldset", {}, h("legend", { text: "出題する領域" }), h("div", { class: "checks" }, domainBoxes)),
         h("div", { class: "row" },
           h("label", { class: "field" }, "出題数", countSel),
@@ -480,6 +607,11 @@
           button("記録（.json）を保存", () => saveJson(S)),
           button("印刷する", () => window.print()),
           button("はじめの画面へ", () => { location.hash = "#/"; }, "btn ghost"))),
+      S.plan ? h("section", { class: "card" },
+        h("h2", { text: `この問題セットの配分（${S.plan.label}）` }),
+        h("div", { class: "table-wrap" }, h("table", {},
+          h("thead", {}, h("tr", {}, h("th", { text: "基準" }), h("th", { text: "区分" }), h("th", { text: "問題数" }))),
+          h("tbody", {}, S.plan.rows.map((r) => h("tr", {}, h("td", { text: r.part }), h("td", { text: r.label }), h("td", { class: "num", text: r.n }))))))) : null,
       breakdown(sm),
       h("section", { class: "card" }, h("h2", { text: "問題ごとの解説" }), h("p", { class: "muted", text: "各行を開くと、すべての選択肢の解説と根拠を確認できます。" }), list));
   }
@@ -500,11 +632,30 @@
         h("tbody", {}, [...byDomain.get(d).entries()].sort((a, b) => a[0].localeCompare(b[0], "ja"))
           .map(([k, n]) => h("tr", {}, h("td", { text: k }), h("td", { class: "num", text: n }))))))));
     const missing = DOMAIN_ORDER.filter((d) => !byDomain.has(d)).map(domainName);
+    const ratioTable = (title, note, rows) => {
+      if (!rows || !rows.length) return null;
+      const total = rows.reduce((a, r) => a + r.weight, 0) || 1;
+      const qTotal = rows.reduce((a, r) => a + r.questions, 0) || 1;
+      return h("section", { class: "card" },
+        h("h2", { text: title }), h("p", { class: "muted", text: note }),
+        h("div", { class: "table-wrap" }, h("table", {},
+          h("thead", {}, h("tr", {}, h("th", { text: "区分" }), h("th", { text: "目安" }), h("th", { text: "今の問題" }), h("th", { text: "問題の材料になるカード" }))),
+          h("tbody", {}, rows.slice().sort((a, b) => b.weight - a.weight).map((r) =>
+            h("tr", {}, h("td", { text: r.label }), h("td", { class: "num", text: `${Math.round(r.weight / total * 100)}%` }),
+              h("td", { class: "num", text: `${r.questions}問（${Math.round(r.questions / qTotal * 100)}%）` }),
+              h("td", { class: "num", text: `${r.cards}枚` + (r.draft_cards ? `（＋照合前 ${r.draft_cards}枚）` : "") })))))));
+    };
+    const unchecked = !(CUR.checked && CUR.checked.blueprint && CUR.checked.items);
     setView("出題範囲",
       h("section", { class: "card" },
         h("h1", { text: "出題範囲" }),
         h("p", { text: `現在の問題は ${ITEMS.length}問です。各問題は、正答の根拠となる事実カードに付けた医師国家試験出題基準（令和6年版）と医学教育モデル・コア・カリキュラム（令和4年度改訂版）の番号で分類しています。` }),
-        missing.length ? h("p", { class: "muted", text: `準備中の領域：${missing.join("、")}` }) : null),
+        missing.length ? h("p", { class: "muted", text: `準備中の領域：${missing.join("、")}` }) : null,
+        unchecked ? h("p", { class: "notice", text: "ブループリントの割合と出題基準の項目一覧は、原本との照合が済むまで暫定値です。" }) : null),
+      ratioTable("医師国家試験ブループリント（5年生以上の配分）",
+        "医学各論の大項目の出題割合（設計表）に、小項目のレベル（a=3、b=2、c=1）を掛けた目安です。大項目の下の割合は設計表にないため、レベルの重みは当サイトの仮定です。", CUR.blueprint),
+      ratioTable("モデル・コア・カリキュラム（1〜4年生の配分）",
+        "別表1（疾患表）と別表2（臓器別の学修項目）の項目数（基本●の疾患は2、それ以外は1）を目安にしています。コア・カリキュラムには公式の割合はありません。", CUR.core),
       sections);
   }
 

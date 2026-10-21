@@ -16,3 +16,4 @@
 5. 一度付けた問題IDは使い回さない。廃止は `status: retired`。
 6. 解答の記録を外部に送る機能を足さない。CSP の `connect-src 'none'` を外さない。`innerHTML` を使わない。
 7. 画面の文言は平易な日本語にする。
+8. 学年別の配分の重み（`tools/curriculum.py` の LEVEL_W・CORE_W・KOKUSHI_TO_CORE）は当サイトの仮定。変えるときは理由を README に書く。ブループリントと出題基準の数値は事実票の `data/curriculum/` だけを使い、このレポジトリに写さない。

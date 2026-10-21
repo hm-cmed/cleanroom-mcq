@@ -63,7 +63,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add items proposals data/questions.js reports/check_report.md review
+          git add items proposals data/questions.js reports/check_report.md reports/coverage.md review
           if git diff --cached --quiet; then echo "変更なし"; exit 0; fi
           git commit -m "監修の反映（Issue #$ISSUE）"
           git pull --rebase origin main

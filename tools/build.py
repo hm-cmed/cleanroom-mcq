@@ -21,6 +21,7 @@ import unicodedata
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import DEFAULT_FACTS, ROOT, is_current_approval, item_hash, load_domains, load_facts, load_items  # noqa: E402
+import curriculum  # noqa: E402
 
 ID_RE = re.compile(r"^Q-[A-Z]{2}-\d{3}$")
 FACT_RE = re.compile(r"^[A-Z]{2}-\d{3}$")
@@ -127,7 +128,7 @@ def check(items: list[dict], facts: dict[str, dict], domains: dict[str, dict]) -
     return errors, warns
 
 
-def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None, domains: dict[str, dict]) -> dict:
+def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None, domains: dict[str, dict], cur: dict) -> dict:
     used: dict[str, dict] = {}
     out_items = []
     for it in items:
@@ -135,7 +136,8 @@ def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None, dom
             continue
         key = next(i for i, o in enumerate(it["options"]) if o["truth"] is it["ask"])
         key_card = facts[it["options"][key]["fact"]]
-        cur = key_card.get("curriculum") or {}
+        cls = curriculum.classify(key_card, cur)
+        kc = key_card.get("curriculum") or {}
         out_items.append({
             "id": it["id"],
             "domain": it["id"].split("-")[1],
@@ -143,8 +145,10 @@ def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None, dom
             "stem": it["stem"],
             "options": [{"text": o["text"], "truth": o["truth"], "fact": o["fact"]} for o in it["options"]],
             "key": key,
-            "kokushi": cur.get("kokushi") or "",
-            "core": cur.get("core_curriculum") or "",
+            "kokushi": kc.get("kokushi") or "",
+            "core": kc.get("core_curriculum") or "",
+            # 学年別の配分に使う分類（tools/curriculum.py）
+            "bp": cls["bp"] or "", "cc": cls["core"] or "", "level": cls["level"], "basic": cls["basic"],
             "subdomain": key_card.get("subdomain") or "",
             # 監修後に問題や根拠カードが変わったものは「監修前」として出す（再監修が必要）
             "status": "approved" if is_current_approval(it, facts) else "draft",
@@ -172,6 +176,39 @@ def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None, dom
         "fields": {k: v["field"] for k, v in domains.items()},
         "items": out_items,
         "facts": dict(sorted(used.items())),
+        "curriculum": curriculum_summary(out_items, facts, cur),
+    }
+
+
+def curriculum_summary(out_items: list[dict], facts: dict[str, dict], cur: dict) -> dict:
+    """ブループリント・コアカリの各区分の目安の重みと、問題数・使えるカード数（出典照合済み以上）。"""
+    usable = [c for c in facts.values() if (c.get("publication_info") or {}).get("status") in ("verified_sources", "verified_expert")]
+    drafts = [c for c in facts.values() if (c.get("publication_info") or {}).get("status") == "draft"]
+    cls_u = [curriculum.classify(c, cur) for c in usable]
+    cls_d = [curriculum.classify(c, cur) for c in drafts]
+
+    def table(strata: dict[str, dict], key: str, systems: set[str] | None) -> list[dict]:
+        rows = []
+        for sid, st in strata.items():
+            if systems is not None and st.get("system") not in systems:
+                continue
+            rows.append({"id": sid, "label": st["label"], "group": st.get("chapter") or st.get("system", ""),
+                         "weight": st["weight"],
+                         "questions": sum(1 for it in out_items if it[key] == sid),
+                         "cards": sum(1 for c in cls_u if c["bp" if key == "bp" else "core"] == sid),
+                         "draft_cards": sum(1 for c in cls_d if c["bp" if key == "bp" else "core"] == sid)})
+        return rows
+
+    bp = curriculum.blueprint_strata(cur)
+    chapters = {it["bp"].split("-")[0][3:] for it in out_items if it["bp"]}
+    bp = {k: v for k, v in bp.items() if k[3:].split("-")[0] in chapters}
+    cs = curriculum.core_strata(cur)
+    systems = {cs[it["cc"]]["system"] for it in out_items if it["cc"] in cs}
+    return {
+        "checked": cur.get("checked", {}),
+        "level_weights": curriculum.LEVEL_W,
+        "blueprint": table(bp, "bp", None),
+        "core": table(cs, "cc", systems),
     }
 
 
@@ -186,6 +223,7 @@ def main() -> int:
         return 2
     facts = load_facts(args.facts)
     domains = load_domains(args.facts)
+    cur = curriculum.load(args.facts)
     items = load_items()
     errors, warns = check(items, facts, domains)
     for it in items:
@@ -212,13 +250,31 @@ def main() -> int:
         for e in errors[:20]:
             print("  エラー:", e)
         return 1
-    data = export(items, facts, git_head(args.facts), domains)
+    data = export(items, facts, git_head(args.facts), domains, cur)
+    write_coverage(data)
     body = json.dumps(data, ensure_ascii=False, indent=1)
     with open(os.path.join(ROOT, "data", "questions.js"), "w", encoding="utf-8") as f:
         f.write("// このファイルは tools/build.py が作ります。直接書き換えないでください。\n")
         f.write("window.MCQ_DATA = " + body + ";\n")
     print("data/questions.js を作りました")
     return 0
+
+
+def write_coverage(data: dict) -> None:
+    """reports/coverage.md：ブループリント・コアカリの目安と、問題数・カード数の差。"""
+    c = data["curriculum"]
+    L = ["# 出題範囲と配分の目安", "", f"作成：{data['built_at']}", "",
+         "- ブループリントの目安：医学各論の大項目の割合（設計表）× 小項目のレベルの重み（a=3、b=2、c=1、当サイトの仮定）。",
+         "- コアカリの目安：別表1（疾患表）と別表2（臓器別の学修項目）の項目数（基本●の疾患は2、それ以外は1）。",
+         f"- 設計表の転記の原本照合：{'済み' if c['checked'].get('blueprint') else '未'}（小項目一覧：{'済み' if c['checked'].get('items') else '未'}）", ""]
+    for title, rows in (("医師国家試験ブループリント（5年生以上）", c["blueprint"]), ("モデル・コア・カリキュラム（1〜4年生）", c["core"])):
+        total = sum(r["weight"] for r in rows) or 1
+        L += [f"## {title}", "", "| 区分 | 目安 | 問題数 | 使えるカード（出典照合済み） | 照合前のカード |", "|---|---|---|---|---|"]
+        for r in sorted(rows, key=lambda r: -r["weight"]):
+            L.append(f"| {r['label']} | {r['weight'] / total * 100:.0f}% | {r['questions']} | {r['cards']} | {r['draft_cards']} |")
+        L.append("")
+    with open(os.path.join(ROOT, "reports", "coverage.md"), "w", encoding="utf-8") as f:
+        f.write("\n".join(L) + "\n")
 
 
 if __name__ == "__main__":
