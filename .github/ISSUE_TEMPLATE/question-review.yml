@@ -1,0 +1,57 @@
+name: 問題の監修（1問）
+description: 監修者用。問題1問を確認して、承認・修正・廃止のいずれかを記録します。
+title: "[監修] 問題"
+labels: ["監修"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        監修ページ（`review/`）の「この問題を監修する」から開くと、問題IDと版が自動で入ります。
+        承認は数分で自動的に記録され、サイトに「監修済み」として反映されます。修正・廃止は修正案として記録され、担当者が対応します。
+  - type: input
+    id: question_id
+    attributes:
+      label: 問題ID
+      placeholder: "例：Q-LV-001"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 確認した版
+      description: 監修ページから開くと自動で入ります。変更しないでください。
+    validations:
+      required: true
+  - type: dropdown
+    id: judge
+    attributes:
+      label: 判定
+      options:
+        - 承認（このままでよい）
+        - 修正が必要
+        - 廃止すべき
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: 修正案
+      description: 「修正が必要」のとき、直した問題文・選択肢などを書いてください。
+  - type: textarea
+    id: comment
+    attributes:
+      label: コメント
+  - type: input
+    id: reviewer
+    attributes:
+      label: 監修者名
+      description: 問題の記録に残る氏名です。
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 確認
+      options:
+        - label: 正答が1つに決まり、誤りの選択肢が確かに誤りであることを、根拠カードに照らして確認しました。
+          required: true

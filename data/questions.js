@@ -1,6 +1,6 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-10-21 20:54",
+ "built_at": "2026-10-21 21:14",
  "facts_revision": "b52dd0d",
  "domains": {
   "HP": "H. pylori関連疾患",
@@ -13,6 +13,18 @@ window.MCQ_DATA = {
   "AB": "腹膜・腹壁・急性腹症",
   "XS": "症候・検査・栄養",
   "NG": "神経消化器病"
+ },
+ "fields": {
+  "HP": "消化器",
+  "UG": "消化器",
+  "ES": "消化器",
+  "GD": "消化器",
+  "IN": "消化器",
+  "LV": "消化器",
+  "BP": "消化器",
+  "AB": "消化器",
+  "XS": "消化器",
+  "NG": "消化器"
  },
  "items": [
   {
@@ -52,6 +64,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-295 (id: Juyv1iM)；TBL-02-07-024 (id: JlAKpko)",
    "subdomain": "肝硬変とその合併症",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -92,6 +105,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-295 (id: Juyv1iM)",
    "subdomain": "肝硬変とその合併症",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -132,6 +146,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)；TBL-01-00-298 (id: Jlvnl6w)；TBL-01-00-284 (id: Jlvnl6A)",
    "subdomain": "肝硬変とその合併症",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -172,6 +187,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)；TBL-01-00-298 (id: Jlvnl6w)",
    "subdomain": "肝細胞癌",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -212,6 +228,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-288 (id: Jlvnl7c)",
    "subdomain": "NAFLD/NASH・MASLD",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -252,6 +269,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-282 (id: Jlvnl50)；TBL-01-00-285 (id: Jlvnl6Q)",
    "subdomain": "ウイルス性肝炎",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -292,6 +310,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-283 (id: Jlvnl54)；TBL-02-07-027 (id: JlAKpk4)",
    "subdomain": "ウイルス性肝炎",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -332,6 +351,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-292 (id: Jlvnl7I)",
    "subdomain": "自己免疫性肝疾患",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -372,6 +392,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-02-07-023 (id: JlAKpks)",
    "subdomain": "体質性黄疸",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -412,6 +433,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "代謝性肝疾患",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -452,6 +474,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-02-07-030 (id: JlAKplE)",
    "subdomain": "機能性ディスペプシア",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -492,6 +515,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "機能性ディスペプシア",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -532,6 +556,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)；TBL-02-07-033 (id: JlAKplQ)",
    "subdomain": "胃癌",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -572,6 +597,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)；TBL-02-07-030 (id: JlAKplE)；TBL-02-07-031 (id: JlAKplI)",
    "subdomain": "胃癌",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -612,6 +638,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)",
    "subdomain": "GIST・粘膜下腫瘍",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -652,6 +679,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "NSAID・LDA潰瘍の予防",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -692,6 +720,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "胃切除後症候群",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -732,6 +761,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "胃アニサキス症",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -772,6 +802,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "胃ポリープ",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -812,6 +843,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "胃・十二指腸憩室",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -852,6 +884,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-269 (id: Jlvnl34)；TBL-01-00-270 (id: Jlvnl4s)",
    "subdomain": "過敏性腸症候群",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -892,6 +925,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-268 (id: Jlvnl4o)",
    "subdomain": "慢性便秘症",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -932,6 +966,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-263 (id: Jlvnl4E)；TBL-02-07-030 (id: JlAKplE)；TBL-02-07-029 (id: JlAKplA)",
    "subdomain": "大腸憩室出血・憩室炎",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -972,6 +1007,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-262 (id: Jlvnl38)；TBL-02-07-029 (id: JlAKplA)",
    "subdomain": "大腸憩室出血・憩室炎",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1012,6 +1048,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)；TBL-01-00-272 (id: Jlvnl3s)；TBL-01-00-650 (id: Jlvnmc0)；TBL-02-07-030 (id: JlAKplE)",
    "subdomain": "炎症性腸疾患",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1052,6 +1089,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-273 (id: Jlvnl3w)",
    "subdomain": "炎症性腸疾患",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1092,6 +1130,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)；TBL-01-00-649 (id: Jlvnmcs)；TBL-02-07-033 (id: JlAKplQ)",
    "subdomain": "大腸ポリープ",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1132,6 +1171,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)；TBL-01-00-650 (id: Jlvnmc0)；TBL-02-07-020 (id: JlAKpkk)",
    "subdomain": "大腸癌",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1172,6 +1212,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-270 (id: Jlvnl4s)",
    "subdomain": "Clostridioides difficile感染症",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1212,6 +1253,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-270 (id: Jlvnl4s)",
    "subdomain": "感染性腸炎",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1252,6 +1294,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)",
    "subdomain": "食道癌",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1292,6 +1335,7 @@ window.MCQ_DATA = {
    "core": "PS-03-04-14 (id: JkxnuYE)",
    "subdomain": "食道癌",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1332,6 +1376,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-02-07-030 (id: JlAKplE)",
    "subdomain": "GERD・NERD・Barrett食道",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1372,6 +1417,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "GERD・NERD・Barrett食道",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1412,6 +1458,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "好酸球性食道炎（EoE）",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1452,6 +1499,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-02-07-004 (id: JlAKpjc)",
    "subdomain": "食道運動障害",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1492,6 +1540,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-02-07-019 (id: JlAKpkg)",
    "subdomain": "食道静脈瘤・門脈圧亢進症",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1532,6 +1581,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "食道静脈瘤・門脈圧亢進症",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1572,6 +1622,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "その他の食道疾患",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   },
@@ -1612,6 +1663,7 @@ window.MCQ_DATA = {
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "subdomain": "その他の食道疾患",
    "status": "draft",
+   "stale": false,
    "reviewer": "",
    "reviewed_at": ""
   }

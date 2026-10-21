@@ -366,7 +366,7 @@
         h("p", { class: "meta" },
           h("span", { class: "tag", text: domainName(it.domain) }),
           it.kokushi ? h("span", { class: "tag light", text: it.kokushi }) : null,
-          it.status !== "approved" ? h("span", { class: "tag warn", text: "監修前" }) : null,
+          it.status !== "approved" ? h("span", { class: "tag warn", text: "監修前" }) : h("span", { class: "tag ok", text: "監修済み" }),
           h("span", { class: "qid", text: it.id })),
         h("h1", { class: "stem", text: it.stem }),
         h("div", { class: "options", role: "radiogroup", "aria-label": "選択肢" }, optButtons),

@@ -1,0 +1,24 @@
+name: 問題の誤りを知らせる
+description: 問題や解説の誤り、分かりにくい点を知らせてください（どなたでも送れます）。
+title: "[報告] "
+labels: ["報告"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ご協力ありがとうございます。問題IDは、問題の右上（例：Q-LV-001）に表示されています。
+        **個人情報（患者さんの情報など）は書かないでください。** この Issue は公開されます。
+  - type: input
+    id: question_id
+    attributes:
+      label: 問題ID
+      placeholder: "例：Q-LV-001"
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: 内容
+      description: どこが、なぜ誤り（分かりにくい）と考えたか。根拠となる文献があれば書いてください。
+    validations:
+      required: true

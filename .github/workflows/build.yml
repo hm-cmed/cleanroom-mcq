@@ -1,0 +1,72 @@
+name: 問題データの更新
+
+# 事実票（hm-cmed/cleanroom-gi-facts）の最新版と照合して data/questions.js と監修ページを作り直す。
+# - 事実票の監修が反映されたとき（事実票側から通知が来たとき）
+# - 毎日 4:00（日本時間）
+# - 問題ファイル（items/）やツールを変更したとき
+# - Actions タブから手動で実行したとき
+# 事実票が非公開レポジトリの場合は、Settings → Secrets に FACTS_REPO_TOKEN（事実票を読める
+# トークン）を登録しておく（README「事実票との自動連携」）。
+
+on:
+  push:
+    branches: [main]
+    paths: ["items/**", "tools/**"]
+  schedule:
+    - cron: "0 19 * * *"
+  repository_dispatch:
+    types: [facts-updated]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-update
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FACTS_DIR: _facts
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 事実票を取得する
+        uses: actions/checkout@v4
+        with:
+          repository: hm-cmed/cleanroom-gi-facts
+          path: _facts
+          token: ${{ secrets.FACTS_REPO_TOKEN || github.token }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml==6.0.3
+
+      - name: 照合して問題データと監修ページを作る
+        run: |
+          python tools/build.py
+          python tools/make_review_pages.py
+
+      - name: 変更を保存する（GitHub Pages に自動で反映される）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/questions.js reports/check_report.md review
+          if git diff --cached --quiet; then echo "変更なし"; exit 0; fi
+          git commit -m "問題データを事実票の最新版で更新"
+          git pull --rebase origin main
+          git push
+
+  # 変更を保存したあと、サイトを公開し直す（bot による保存では公開が自動で始まらないため）
+  pages:
+    needs: build
+    uses: ./.github/workflows/pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

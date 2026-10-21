@@ -30,6 +30,8 @@
 | `tools/build.py` | 問題を事実票と照合し、`data/questions.js` を作る |
 | `data/questions.js` | サイトが読む問題データ（自動で作る。直接編集しない） |
 | `reports/check_report.md` | 照合の結果（エラーと、監修のときに見る注意点） |
+| `review/` | GitHub で監修するためのページ（自動で作る） |
+| `.github/` | 監修フォームと、自動更新・公開の仕組み（GitHub Actions） |
 
 ## 問題の書き方
 
@@ -42,7 +44,7 @@
     - {text: （選択肢の文）, truth: false, fact: LV-010}
     # …
   status: draft           # draft（監修前）/ approved（監修済み）/ retired（廃止）
-  # approved にするときは reviewer（監修者）と reviewed_at（日付）を書く
+  # approved・reviewer・reviewed_at・reviewed_hash は、GitHub の監修フォームから自動で書かれる
 ```
 
 - `fact` には、その選択肢が正しい・誤っていると言える根拠のカードIDを書きます。
@@ -62,11 +64,38 @@ python tools\build.py
 
 エラーが0件なら `data/questions.js` が更新されます。
 
-## 監修の進め方
+## 監修の進め方（GitHub で行う）
 
-1. `reports/check_report.md` の「注意」と、サイトで実際に解いた画面を見ながら、問題文・選択肢・解説を確認する。
-2. 問題がなければ、その問題の `status` を `approved` にし、`reviewer` と `reviewed_at` を書く。
-3. 監修済みの問題がそろったら、`js/config.js` の `showDrafts` を `false` にすると、監修前の問題は出題されなくなる。
+監修は GitHub の画面だけでできます。プログラムの知識は要りません。
+
+1. 監修者に GitHub のアカウントを作ってもらい、このレポジトリの Settings → Collaborators で招待する（書き込み権限のある人の監修だけが自動で反映されます）。
+2. 監修者は [review/README.md](review/README.md) を開き、領域のページで問題・正答・各選択肢の根拠カードを確認する。
+3. 問題がなければ「まとめて承認する」、直すべき問題は「この問題を監修する」→「修正が必要」から送信する（Issue フォームが開き、問題IDと版は自動で入る）。
+4. 数分で GitHub Actions が `items/*.yaml` に監修者・日付・版を記録し、サイトでも「監修済み」として出題されます。修正案は `proposals/` に残り、問題は書き換えません。
+5. 監修したあとに問題文や根拠カードの内容が変わると、その問題は自動で「監修前」に戻り、監修ページに「再監修が必要」と表示されます。
+6. 監修済みの問題がそろったら、`js/config.js` の `showDrafts` を `false` にすると、監修前の問題は出題されなくなります。
+
+利用者は「問題の誤りを知らせる」フォーム（Issues → New issue）から、誤りを報告できます。
+
+## 事実票との自動連携
+
+問題の解説は事実カードの最新の文章から作ります。事実カードが監修・修正されると、次のどれかのときに問題サイトも自動で最新版になります。
+
+- 毎日 4:00（日本時間）の自動更新
+- 事実票側で監修が反映されたときの通知（下の 2. を設定した場合）
+- Actions タブの「問題データの更新」→「Run workflow」
+
+### 最初に1回だけ行う設定
+
+1. **サイトの公開**：このレポジトリの Settings → Pages → Build and deployment の Source を「GitHub Actions」にする。
+2. **事実票を読むためのトークン**（事実票が非公開レポジトリの間は必要）：
+   1. GitHub 右上のアイコン → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token。
+   2. Repository access で `cleanroom-gi-facts` と `cleanroom-mcq` を選び、Permissions の Contents を「Read and write」にして作成する。
+   3. できたトークンを、`cleanroom-mcq` の Settings → Secrets and variables → Actions に `FACTS_REPO_TOKEN` という名前で登録する。
+   4. 同じトークンを、`cleanroom-gi-facts` の同じ場所に `MCQ_DISPATCH_TOKEN` という名前で登録する（事実票の監修が反映されたとき、すぐに問題サイトへ知らせるため。登録しなくても毎日の自動更新で反映されます）。
+   5. トークンには有効期限があります。期限が切れたら作り直して登録し直してください。
+
+事実票を公開レポジトリにした場合は、2. の `FACTS_REPO_TOKEN` は不要です。
 
 ## 開発
 

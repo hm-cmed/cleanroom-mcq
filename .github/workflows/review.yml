@@ -1,0 +1,90 @@
+name: 監修の反映
+
+# Issue フォーム（.github/ISSUE_TEMPLATE/question-*.yml）で送られた監修結果を items/*.yaml に反映し、
+# 問題データと監修ページを作り直す。書き込み権限のない人の送信は反映しない（公開レポジトリのため）。
+# 安全のため、Issue の本文はシェルに直接渡さず、イベントのファイルを Python で読む。
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: data-update
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: startsWith(github.event.issue.title, '[監修]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FACTS_DIR: _facts
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 事実票を取得する
+        uses: actions/checkout@v4
+        with:
+          repository: hm-cmed/cleanroom-gi-facts
+          path: _facts
+          token: ${{ secrets.FACTS_REPO_TOKEN || github.token }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml==6.0.3
+
+      - name: 送信した人の権限を調べる
+        id: perm
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          p=$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${SENDER}/permission" --jq .permission 2>/dev/null || echo none)
+          echo "permission=$p" >> "$GITHUB_OUTPUT"
+
+      - name: 監修結果を反映する
+        id: apply
+        run: python tools/apply_github_review.py --event "$GITHUB_EVENT_PATH" --permission "${{ steps.perm.outputs.permission }}" --out "$RUNNER_TEMP/result.md"
+
+      - name: 問題データと監修ページを作り直す
+        run: |
+          python tools/build.py
+          python tools/make_review_pages.py
+
+      - name: 変更を保存する
+        env:
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add items proposals data/questions.js reports/check_report.md review
+          if git diff --cached --quiet; then echo "変更なし"; exit 0; fi
+          git commit -m "監修の反映（Issue #$ISSUE）"
+          git pull --rebase origin main
+          git push
+
+      - name: Issue に結果を書き込む
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+          LABELS: ${{ steps.apply.outputs.labels }}
+          CLOSE: ${{ steps.apply.outputs.close }}
+        run: |
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/result.md"
+          if [ -n "$LABELS" ]; then gh label create "$LABELS" --repo "$GITHUB_REPOSITORY" --force >/dev/null 2>&1 || true; gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label "$LABELS"; fi
+          if [ "$CLOSE" = "true" ]; then gh issue close "$ISSUE" --repo "$GITHUB_REPOSITORY"; fi
+
+  # 変更を保存したあと、サイトを公開し直す（bot による保存では公開が自動で始まらないため）
+  pages:
+    needs: apply
+    uses: ./.github/workflows/pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

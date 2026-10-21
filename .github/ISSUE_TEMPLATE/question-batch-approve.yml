@@ -1,0 +1,34 @@
+name: 問題のまとめて承認
+description: 監修者用。監修ページで確認した複数の問題を、まとめて承認します。
+title: "[監修] まとめて承認"
+labels: ["監修"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        監修ページの「まとめて承認する」から開くと、問題IDと版の一覧が自動で入ります。
+        **直すべき問題は、この一覧から行ごと消してから送信し**、その問題は「この問題を監修する」から別に報告してください。
+  - type: textarea
+    id: questions
+    attributes:
+      label: まとめて承認する問題
+      description: 1行に「問題ID 版」を書きます（自動で入ります）。
+    validations:
+      required: true
+  - type: input
+    id: reviewer
+    attributes:
+      label: 監修者名
+    validations:
+      required: true
+  - type: textarea
+    id: comment
+    attributes:
+      label: コメント
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 確認
+      options:
+        - label: 一覧のすべての問題について、根拠カードに照らして確認しました。
+          required: true

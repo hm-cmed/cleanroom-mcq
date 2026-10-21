@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import glob
 import json
 import os
 import re
@@ -20,17 +19,11 @@ import subprocess
 import sys
 import unicodedata
 
-import yaml
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import DEFAULT_FACTS, ROOT, is_current_approval, item_hash, load_domains, load_facts, load_items  # noqa: E402
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-DOMAINS = {
-    "HP": "H. pylori関連疾患", "UG": "上部消化管出血", "ES": "食道", "GD": "胃・十二指腸",
-    "IN": "小腸・大腸", "LV": "肝", "BP": "胆・膵", "AB": "腹膜・腹壁・急性腹症",
-    "XS": "症候・検査・栄養", "NG": "神経消化器病",
-}
-ID_RE = re.compile(r"^Q-(%s)-\d{3}$" % "|".join(DOMAINS))
-FACT_RE = re.compile(r"^(%s)-\d{3}$" % "|".join(DOMAINS))
+ID_RE = re.compile(r"^Q-[A-Z]{2}-\d{3}$")
+FACT_RE = re.compile(r"^[A-Z]{2}-\d{3}$")
 ITEM_STATUS = {"draft", "approved", "retired"}
 # 正答の根拠にしてよい事実カードの状態（draft のカードは出典の照合が済んでいない）
 KEY_FACT_OK = {"verified_sources", "verified_expert"}
@@ -51,15 +44,6 @@ def has_number(text: str, num: str) -> bool:
     return re.search(r"(?<![\d.])%s(?![\d])" % re.escape(num), text) is not None
 
 
-def load_facts(facts_dir: str) -> dict[str, dict]:
-    facts: dict[str, dict] = {}
-    for path in sorted(glob.glob(os.path.join(facts_dir, "*.yaml"))):
-        with open(path, encoding="utf-8") as f:
-            for card in yaml.safe_load(f) or []:
-                facts[card["id"]] = card
-    return facts
-
-
 def git_head(path: str) -> str | None:
     try:
         return subprocess.run(["git", "-C", path, "rev-parse", "--short", "HEAD"],
@@ -73,15 +57,15 @@ def card_text(card: dict) -> str:
     return norm(" ".join(str(a.get(k) or "") for k in ("plain_statement_ja", "condition", "differential")))
 
 
-def check(items: list[dict], facts: dict[str, dict]) -> tuple[list[str], list[str]]:
+def check(items: list[dict], facts: dict[str, dict], domains: dict[str, dict]) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warns: list[str] = []
     seen: set[str] = set()
     for n, it in enumerate(items, 1):
         where = it.get("id") or f"{n}番目の問題"
         iid = it.get("id", "")
-        if not ID_RE.match(iid):
-            errors.append(f"{where}: ID は Q-<領域>-<3桁> の形にしてください（例 Q-LV-001）")
+        if not ID_RE.match(iid) or iid.split("-")[1] not in domains:
+            errors.append(f"{where}: ID は Q-<領域>-<3桁> の形にし、領域は事実票の data/domains.yaml にある接頭辞にしてください（例 Q-LV-001）")
         if iid in seen:
             errors.append(f"{where}: ID が重複しています")
         seen.add(iid)
@@ -90,8 +74,8 @@ def check(items: list[dict], facts: dict[str, dict]) -> tuple[list[str], list[st
             errors.append(f"{where}: status は draft / approved / retired のいずれかです")
         if status == "retired":
             continue
-        if status == "approved" and not (it.get("reviewer") and it.get("reviewed_at")):
-            errors.append(f"{where}: approved にするには reviewer（監修者）と reviewed_at（日付）が必要です")
+        if status == "approved" and not (it.get("reviewer") and it.get("reviewed_at") and it.get("reviewed_hash")):
+            errors.append(f"{where}: approved にするには reviewer（監修者）・reviewed_at（日付）・reviewed_hash（版）が必要です。GitHub の監修フォームから承認してください")
         if not isinstance(it.get("ask"), bool):
             errors.append(f"{where}: ask は true（正しいのは）か false（誤っているのは）です")
         stem = str(it.get("stem") or "")
@@ -143,7 +127,7 @@ def check(items: list[dict], facts: dict[str, dict]) -> tuple[list[str], list[st
     return errors, warns
 
 
-def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None) -> dict:
+def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None, domains: dict[str, dict]) -> dict:
     used: dict[str, dict] = {}
     out_items = []
     for it in items:
@@ -162,7 +146,9 @@ def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None) -> 
             "kokushi": cur.get("kokushi") or "",
             "core": cur.get("core_curriculum") or "",
             "subdomain": key_card.get("subdomain") or "",
-            "status": it["status"],
+            # 監修後に問題や根拠カードが変わったものは「監修前」として出す（再監修が必要）
+            "status": "approved" if is_current_approval(it, facts) else "draft",
+            "stale": it["status"] == "approved" and not is_current_approval(it, facts),
             "reviewer": it.get("reviewer") or "",
             "reviewed_at": str(it.get("reviewed_at") or ""),
         })
@@ -182,7 +168,8 @@ def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None) -> 
     return {
         "built_at": dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).strftime("%Y-%m-%d %H:%M"),
         "facts_revision": facts_rev or "",
-        "domains": DOMAINS,
+        "domains": {k: v["name"] for k, v in domains.items()},
+        "fields": {k: v["field"] for k, v in domains.items()},
         "items": out_items,
         "facts": dict(sorted(used.items())),
     }
@@ -190,26 +177,28 @@ def export(items: list[dict], facts: dict[str, dict], facts_rev: str | None) -> 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="問題を事実票と照合し、data/questions.js を作る")
-    ap.add_argument("--facts", default=os.path.join(ROOT, "..", "cleanroom-gi-facts"),
-                    help="事実票レポジトリのフォルダ（既定: ../cleanroom-gi-facts）")
+    ap.add_argument("--facts", default=DEFAULT_FACTS,
+                    help="事実票レポジトリのフォルダ（既定: ../cleanroom-gi-facts。環境変数 FACTS_DIR でも指定できる）")
     args = ap.parse_args()
     facts_dir = os.path.join(args.facts, "data", "facts")
     if not os.path.isdir(facts_dir):
         print(f"事実票のフォルダが見つかりません: {facts_dir}", file=sys.stderr)
         return 2
-    facts = load_facts(facts_dir)
-    items: list[dict] = []
-    for path in sorted(glob.glob(os.path.join(ROOT, "items", "*.yaml"))):
-        with open(path, encoding="utf-8") as f:
-            items += yaml.safe_load(f) or []
-    errors, warns = check(items, facts)
+    facts = load_facts(args.facts)
+    domains = load_domains(args.facts)
+    items = load_items()
+    errors, warns = check(items, facts, domains)
+    for it in items:
+        if it.get("status") == "approved" and it.get("reviewed_hash") and not is_current_approval(it, facts):
+            warns.append(f"{it['id']}: 監修のあとに問題文・選択肢・根拠カードが変わりました（版 {it['reviewed_hash']} → {item_hash(it, facts)}）。"
+                         "再監修までは「監修前」として出題します")
 
     os.makedirs(os.path.join(ROOT, "reports"), exist_ok=True)
     live = [i for i in items if i.get("status") != "retired"]
     lines = ["# 照合レポート", "",
              f"- 実行日時: {dt.datetime.now().strftime('%Y-%m-%d %H:%M')}",
              f"- 事実票: {len(facts)} 件（コミット {git_head(args.facts) or '不明'}）",
-             f"- 問題: {len(live)} 問（監修済み {sum(i.get('status') == 'approved' for i in live)} 問）",
+             f"- 問題: {len(live)} 問（監修済み {sum(is_current_approval(i, facts) for i in live)} 問）",
              f"- エラー: {len(errors)} 件 / 注意: {len(warns)} 件", "",
              "## エラー（直すまで公開用データを作りません）", ""]
     lines += [f"- {e}" for e in errors] or ["- なし"]
@@ -223,7 +212,7 @@ def main() -> int:
         for e in errors[:20]:
             print("  エラー:", e)
         return 1
-    data = export(items, facts, git_head(args.facts))
+    data = export(items, facts, git_head(args.facts), domains)
     body = json.dumps(data, ensure_ascii=False, indent=1)
     with open(os.path.join(ROOT, "data", "questions.js"), "w", encoding="utf-8") as f:
         f.write("// このファイルは tools/build.py が作ります。直接書き換えないでください。\n")
