@@ -1,0 +1,447 @@
+# 消化器 5択問題（試作）
+# 書き方は README の「問題の書き方」を参照。
+#   ask: true  → 「正しいのはどれか」（truth: true の選択肢が正答。1つだけ）
+#   ask: false → 「誤っているのはどれか」（truth: false の選択肢が正答。1つだけ）
+#   各選択肢の fact は、その選択肢の正誤を決める事実カードのID（cleanroom-gi-facts）。
+#   解説は、ビルド時に事実カードの主張文から自動で作る（ここには書かない）。
+#   status: draft（監修前） / approved（監修済み） / retired（廃止）。approved は人間だけが付ける。
+
+- id: Q-LV-001
+  ask: true
+  stem: 肝硬変の腹水について正しいのはどれか。
+  options:
+    - {text: 血清-腹水アルブミン濃度勾配（SAAG）が1.1 g/dL以上であれば、門脈圧亢進症による腹水と判断する。, truth: true, fact: LV-006}
+    - {text: 利尿薬はループ利尿薬の単独投与から開始する。, truth: false, fact: LV-010}
+    - {text: 食塩はできる限り摂取しないよう指導する。, truth: false, fact: LV-009}
+    - {text: トルバプタンは腎機能が低下してから開始する。, truth: false, fact: LV-011}
+    - {text: 大量腹水穿刺の際、アルブミン投与は不要である。, truth: false, fact: LV-012}
+  status: draft
+
+- id: Q-LV-002
+  ask: true
+  stem: 肝硬変の合併症について正しいのはどれか。
+  options:
+    - {text: 肝性脳症の治療は蛋白制限が基本である。, truth: false, fact: LV-015}
+    - {text: 特発性細菌性腹膜炎（SBP）は、腹水培養が陰性でも腹水中の好中球数が250/mm³以上であれば診断する。, truth: true, fact: LV-007}
+    - {text: 顕性肝性脳症に進むリスクが高くても、不顕性肝性脳症は治療の対象にならない。, truth: false, fact: LV-016}
+    - {text: プロバイオティクスは肝性脳症の標準治療である。, truth: false, fact: LV-017}
+    - {text: 肝腎症候群は輸液だけで改善する。, truth: false, fact: LV-014}
+  status: draft
+
+- id: Q-LV-003
+  ask: true
+  stem: 肝細胞癌について正しいのはどれか。
+  options:
+    - {text: 超高危険群のサーベイランスは腫瘍マーカーの測定だけで十分である。, truth: false, fact: LV-039}
+    - {text: 典型的な肝細胞癌は、ダイナミックCTの門脈相から平衡相で周囲より高吸収を示す。, truth: false, fact: LV-041}
+    - {text: C型肝硬変でウイルス排除（SVR）が得られた後も、肝細胞癌のサーベイランスを続ける。, truth: true, fact: LV-021}
+    - {text: 日本の肝細胞癌の大半は現在もC型肝炎による。, truth: false, fact: LV-042}
+    - {text: 超音波検査で腫瘤がなければ、腫瘍マーカーが上昇しても追加の画像検査は不要である。, truth: false, fact: LV-040}
+  status: draft
+
+- id: Q-LV-004
+  ask: true
+  stem: Child-Pugh Aで、肝外転移と脈管侵襲がなく、単発で径3 cm以下の肝細胞癌に推奨される治療はどれか。
+  options:
+    - {text: 肝移植, truth: false, fact: LV-045}
+    - {text: 肝動脈化学塞栓療法（TACE）, truth: false, fact: LV-046}
+    - {text: アテゾリズマブとベバシズマブの併用療法, truth: false, fact: LV-047}
+    - {text: 肝切除またはラジオ波焼灼療法（RFA）, truth: true, fact: LV-043}
+    - {text: 緩和ケア, truth: false, fact: LV-045}
+  status: draft
+
+- id: Q-LV-005
+  ask: true
+  stem: 非アルコール性脂肪性肝疾患（NAFLD）・代謝機能障害関連脂肪性肝疾患（MASLD）について正しいのはどれか。
+  options:
+    - {text: NAFLDの予後は脂肪化の程度で決まる。, truth: false, fact: LV-025}
+    - {text: MASLDの診断には肥満が必須である。, truth: false, fact: LV-036}
+    - {text: 脂肪肝にはウルソデオキシコール酸が標準治療である。, truth: false, fact: LV-030}
+    - {text: 体重が減らなければ、運動で肝脂肪は改善しない。, truth: false, fact: LV-034}
+    - {text: NAFLD患者の死因で最も多いのは心血管疾患である。, truth: true, fact: LV-033}
+  status: draft
+
+- id: Q-LV-006
+  ask: true
+  stem: ウイルス性急性肝炎について正しいのはどれか。
+  options:
+    - {text: A型肝炎は慢性化しない。, truth: true, fact: LV-052}
+    - {text: 成人のB型肝炎ウイルス感染は多くが慢性化する。, truth: false, fact: LV-055}
+    - {text: C型肝炎ウイルスに感染しても慢性化することはまれである。, truth: false, fact: LV-059}
+    - {text: E型肝炎は輸入感染症に限られる。, truth: false, fact: LV-063}
+    - {text: E型肝炎は保健所への届出が不要である。, truth: false, fact: LV-065}
+  status: draft
+
+- id: Q-LV-007
+  ask: true
+  stem: 急性肝不全とB型肝炎ウイルスの再活性化について正しいのはどれか。
+  options:
+    - {text: 日本の急性肝不全の診断には肝性脳症が必須である。, truth: false, fact: LV-068}
+    - {text: 日本の昏睡型急性肝不全の成因で最も多いのはアセトアミノフェンである。, truth: false, fact: LV-070}
+    - {text: 遅発性肝不全（LOHF）は急性肝不全の亜急性型と同じ病態である。, truth: false, fact: LV-069}
+    - {text: HBs抗原陽性者でも、肝機能が正常なら免疫抑制・化学療法の前に核酸アナログを投与する必要はない。, truth: false, fact: LV-101}
+    - {text: HBs抗原陰性でHBc抗体陽性の既往感染者でも、免疫抑制・化学療法によってB型肝炎ウイルスが再活性化することがある。, truth: true, fact: LV-102}
+  status: draft
+
+- id: Q-LV-008
+  ask: true
+  stem: 自己免疫性の肝疾患について正しいのはどれか。
+  options:
+    - {text: 抗ミトコンドリア抗体（AMA）が陰性であれば原発性胆汁性胆管炎（PBC）は否定できる。, truth: false, fact: LV-076}
+    - {text: 原発性胆汁性胆管炎（PBC）の第一選択薬はウルソデオキシコール酸である。, truth: true, fact: LV-077}
+    - {text: 自己免疫性肝炎（AIH）は若年男性に多い。, truth: false, fact: LV-079}
+    - {text: 自己免疫性肝炎（AIH）の診断には抗核抗体陽性が必須である。, truth: false, fact: LV-080}
+    - {text: 自己免疫性肝炎（AIH）は副腎皮質ステロイドを中止しても再燃することは少ない。, truth: false, fact: LV-082}
+  status: draft
+
+- id: Q-LV-009
+  ask: false
+  stem: 体質性黄疸について誤っているのはどれか。
+  options:
+    - {text: Gilbert症候群では非抱合型（間接）ビリルビンが上昇する。, truth: true, fact: LV-066}
+    - {text: Gilbert症候群はUGT1A1遺伝子の変化によって起こる。, truth: true, fact: LV-067}
+    - {text: Rotor症候群では抱合型ビリルビンが主体となって上昇する。, truth: true, fact: LV-094}
+    - {text: Dubin-Johnson症候群は進行性の肝障害をきたす。, truth: false, fact: LV-093}
+    - {text: Dubin-Johnson症候群はABCC2遺伝子の変化による。, truth: true, fact: LV-093}
+  status: draft
+
+- id: Q-LV-010
+  ask: true
+  stem: 肝の代謝性・血管性疾患について正しいのはどれか。
+  options:
+    - {text: Wilson病は銅の過剰摂取で起こる。, truth: false, fact: LV-084}
+    - {text: 遺伝性ヘモクロマトーシスは日本人に多い。, truth: false, fact: LV-087}
+    - {text: Wilson病の治療は生涯にわたって続ける。, truth: true, fact: LV-086}
+    - {text: Budd-Chiari症候群は門脈の閉塞で起こる。, truth: false, fact: LV-089}
+    - {text: 特発性門脈圧亢進症は肝炎ウイルスが原因である。, truth: false, fact: LV-091}
+  status: draft
+
+- id: Q-GD-001
+  ask: true
+  stem: 機能性ディスペプシア（FD）について正しいのはどれか。
+  options:
+    - {text: FDと慢性胃炎は同じ概念である。, truth: false, fact: GD-003}
+    - {text: 日本のガイドライン2021では、FDの診断に上部消化管内視鏡は必須ではない。, truth: true, fact: GD-008}
+    - {text: FDは生命予後を悪化させる。, truth: false, fact: GD-017}
+    - {text: 粘膜保護薬はFDの標準治療である。, truth: false, fact: GD-015}
+    - {text: 三環系抗うつ薬はFDの一次治療である。, truth: false, fact: GD-014}
+  status: draft
+
+- id: Q-GD-002
+  ask: false
+  stem: 日本のガイドライン2021における機能性ディスペプシア（FD）の治療について誤っているのはどれか。
+  options:
+    - {text: 初期治療としてPPIの使用が強く推奨されている。, truth: true, fact: GD-009}
+    - {text: アコチアミドの使用が強く推奨されている。, truth: true, fact: GD-011}
+    - {text: 六君子湯の使用が強く推奨されている。, truth: true, fact: GD-012}
+    - {text: 5-HT4受容体作動薬は一次治療として強く推奨されている。, truth: false, fact: GD-013}
+    - {text: 良好な医師患者関係は治療に有用とされる。, truth: true, fact: GD-016}
+  status: draft
+
+- id: Q-GD-003
+  ask: true
+  stem: 早期胃癌の内視鏡治療について正しいのはどれか。
+  options:
+    - {text: 印環細胞癌は分化型として扱う。, truth: false, fact: GD-036}
+    - {text: 未分化型の早期胃癌は、大きさにかかわらず内視鏡切除の適応外である。, truth: false, fact: GD-037}
+    - {text: eCuraC-1と判定されたら、全例で追加の外科切除が必要である。, truth: false, fact: GD-040}
+    - {text: 潰瘍所見のない（UL0）cT1aの分化型で長径2 cm以下の病変は、EMRまたはESDの絶対適応である。, truth: true, fact: GD-037}
+    - {text: 内視鏡切除後にH. pyloriを除菌すれば、内視鏡による経過観察は不要である。, truth: false, fact: GD-041}
+  status: draft
+
+- id: Q-GD-004
+  ask: true
+  stem: 切除不能進行・再発胃癌の薬物療法について正しいのはどれか。
+  options:
+    - {text: 免疫染色1+であればHER2陽性と判定する。, truth: false, fact: GD-053}
+    - {text: ゾルベツキシマブはHER2陽性胃癌に用いる。, truth: false, fact: GD-056}
+    - {text: HER2陽性例では、病勢が進行した後もトラスツズマブを継続する。, truth: false, fact: GD-059}
+    - {text: 化学療法によって多くの例が治癒する。, truth: false, fact: GD-060}
+    - {text: 一次化学療法を始める前に、HER2、CLDN18、PD-L1（CPS）、MSI/MMRを測定することが望ましい。, truth: true, fact: GD-052}
+  status: draft
+
+- id: Q-GD-005
+  ask: true
+  stem: 消化管間質腫瘍（GIST）について正しいのはどれか。
+  options:
+    - {text: 発生部位で最も多いのは胃である。, truth: true, fact: GD-065}
+    - {text: KITが陰性であればGISTは否定できる。, truth: false, fact: GD-063}
+    - {text: 切除の際は系統的なリンパ節郭清を行う。, truth: false, fact: GD-067}
+    - {text: 再発高リスク例の完全切除後のイマチニブ補助療法は、1年間投与が標準である。, truth: false, fact: GD-069}
+    - {text: PDGFRA D842V変異をもつGISTにはイマチニブがよく効く。, truth: false, fact: GD-064}
+  status: draft
+
+- id: Q-GD-006
+  ask: true
+  stem: 薬剤に関連した胃・十二指腸の粘膜傷害について正しいのはどれか。
+  options:
+    - {text: NSAID潰瘍は、原則としてNSAIDを続けたまま治療する。, truth: false, fact: GD-022}
+    - {text: 低用量アスピリン関連の潰瘍は、低用量アスピリンを続けたままPPIを併用して治療することが強く推奨されている。, truth: true, fact: GD-023}
+    - {text: 出血性潰瘍の既往がある患者では、選択的COX-2阻害薬に変更すれば酸分泌抑制薬は不要である。, truth: false, fact: GD-020}
+    - {text: 人工呼吸管理中の重症患者へのPPIの予防投与は、90日死亡率を低下させた。, truth: false, fact: GD-092}
+    - {text: NSAIDによる胃粘膜傷害は胃体部に多い。, truth: false, fact: GD-090}
+  status: draft
+
+- id: Q-GD-007
+  ask: true
+  stem: 胃切除後のダンピング症候群について正しいのはどれか。
+  options:
+    - {text: 早期ダンピング症候群の主な原因は低血糖である。, truth: false, fact: GD-074}
+    - {text: 胃全摘術の後にだけ起こる。, truth: false, fact: GD-076}
+    - {text: 後期ダンピング症候群は、食後の反応性の低血糖を特徴とする。, truth: true, fact: GD-075}
+    - {text: 食事中に水分を多く摂るよう指導する。, truth: false, fact: GD-078}
+    - {text: 食事療法で改善しない場合は、再手術が標準である。, truth: false, fact: GD-079}
+  status: draft
+
+- id: Q-GD-008
+  ask: true
+  stem: アニサキス症について正しいのはどれか。
+  options:
+    - {text: 酢で締めれば幼虫は死滅する。, truth: false, fact: GD-083}
+    - {text: 主な症状は下痢である。, truth: false, fact: GD-082}
+    - {text: 新鮮な魚の刺身であれば感染の心配はない。, truth: false, fact: GD-081}
+    - {text: 日本での発生はまれで、年間数十件程度である。, truth: false, fact: GD-084}
+    - {text: −20℃で24時間以上冷凍すると予防できる。, truth: true, fact: GD-083}
+  status: draft
+
+- id: Q-GD-009
+  ask: true
+  stem: 胃ポリープについて正しいのはどれか。
+  options:
+    - {text: 散発性の胃底腺ポリープは前癌病変として全例切除する。, truth: false, fact: GD-086}
+    - {text: 過形成性ポリープは癌化しない。, truth: false, fact: GD-087}
+    - {text: 胃腺腫は胃癌の前駆病変であり、完全切除が勧められる。, truth: true, fact: GD-088}
+    - {text: H. pyloriを除菌しても過形成性ポリープは退縮しない。, truth: false, fact: GD-087}
+    - {text: PPI内服中に胃粘膜の変化を認めたら、必ずPPIを中止する。, truth: false, fact: GD-089}
+  status: draft
+
+- id: Q-GD-010
+  ask: true
+  stem: 十二指腸憩室について正しいのはどれか。
+  options:
+    - {text: 見つかれば切除する。, truth: false, fact: GD-094}
+    - {text: 大多数は症状を伴う。, truth: false, fact: GD-093}
+    - {text: 頻度は年齢と関係しない。, truth: false, fact: GD-093}
+    - {text: Lemmel症候群は総胆管結石による閉塞性黄疸である。, truth: false, fact: GD-095}
+    - {text: 多くは十二指腸乳頭の周囲にある。, truth: true, fact: GD-093}
+  status: draft
+
+- id: Q-IN-001
+  ask: true
+  stem: 過敏性腸症候群（IBS）について正しいのはどれか。
+  options:
+    - {text: 男性に多い。, truth: false, fact: IN-018}
+    - {text: 感染性腸炎の後に発症することがある。, truth: true, fact: IN-019}
+    - {text: 便形状による病型は経過中に変わらない。, truth: false, fact: IN-020}
+    - {text: IBSと診断した後は、器質的疾患の再評価は不要である。, truth: false, fact: IN-022}
+    - {text: 水溶性食物繊維は無効である。, truth: false, fact: IN-025}
+  status: draft
+
+- id: Q-IN-002
+  ask: true
+  stem: 日本の慢性便秘症診療ガイドライン2023で、生活習慣と食事の改善の次に、内服薬としてまず考慮するのはどれか。
+  options:
+    - {text: 刺激性下剤の連日投与, truth: false, fact: IN-034}
+    - {text: プロバイオティクス, truth: false, fact: IN-034}
+    - {text: 漢方薬, truth: false, fact: IN-034}
+    - {text: 膨張性下剤, truth: false, fact: IN-034}
+    - {text: 浸透圧性下剤, truth: true, fact: IN-034}
+  status: draft
+
+- id: Q-IN-003
+  ask: true
+  stem: 大腸憩室出血について正しいのはどれか。
+  options:
+    - {text: 疑った場合、腸管洗浄液で前処置をして24時間以内に大腸内視鏡を行うことが提案されている。, truth: true, fact: IN-064}
+    - {text: いったん止血すれば再出血はまれである。, truth: false, fact: IN-063}
+    - {text: 非アスピリンNSAIDは再出血と関連しない。, truth: false, fact: IN-062}
+    - {text: 内視鏡で止血できなければ、直ちに大腸切除を行う。, truth: false, fact: IN-066}
+    - {text: 出血を起こしたら、抗凝固薬は永久に中止する。, truth: false, fact: IN-067}
+  status: draft
+
+- id: Q-IN-004
+  ask: true
+  stem: 大腸憩室・大腸憩室炎について正しいのはどれか。
+  options:
+    - {text: 日本の大腸憩室の有病率は欧米より高い。, truth: false, fact: IN-060}
+    - {text: 日本人では、50歳未満の大腸憩室の多くは左側結腸にある。, truth: false, fact: IN-061}
+    - {text: 汎発性腹膜炎を伴う憩室炎は保存的治療の適応である。, truth: false, fact: IN-068}
+    - {text: 憩室炎に伴う3 cm以下の膿瘍は、抗菌薬と腸管安静で治療する。, truth: true, fact: IN-068}
+    - {text: 憩室炎は再発したことだけで大腸切除の適応となる。, truth: false, fact: IN-069}
+  status: draft
+
+- id: Q-IN-005
+  ask: true
+  stem: 潰瘍性大腸炎について正しいのはどれか。
+  options:
+    - {text: 女性に多い。, truth: false, fact: IN-011}
+    - {text: 喫煙は発症の危険因子である。, truth: false, fact: IN-006}
+    - {text: 寛解が得られたら5-ASA製剤は中止してよい。, truth: false, fact: IN-007}
+    - {text: 発症から7〜8年を過ぎると、大腸癌を合併するリスクが高くなる。, truth: true, fact: IN-012}
+    - {text: 手術では人工肛門の造設が必須である。, truth: false, fact: IN-013}
+  status: draft
+
+- id: Q-IN-006
+  ask: true
+  stem: Crohn病について正しいのはどれか。
+  options:
+    - {text: 好発部位は小腸と大腸（とくに回腸）および肛門周囲である。, truth: true, fact: IN-005}
+    - {text: 日本の患者数は潰瘍性大腸炎より多い。, truth: false, fact: IN-001}
+    - {text: 合併症は腸管内に限られる。, truth: false, fact: IN-015}
+    - {text: 喫煙は発症に予防的に働く。, truth: false, fact: IN-006}
+    - {text: 狭窄が疑われても、小腸カプセル内視鏡は安全に使える。, truth: false, fact: IN-009}
+  status: draft
+
+- id: Q-IN-007
+  ask: true
+  stem: 大腸ポリープの内視鏡治療について正しいのはどれか。
+  options:
+    - {text: 癌が疑われる病変にもコールドスネアポリペクトミーを行う。, truth: false, fact: IN-037}
+    - {text: 鋸歯状病変は癌化しない。, truth: false, fact: IN-039}
+    - {text: ポリープを切除すれば、その後のサーベイランス大腸内視鏡は不要である。, truth: false, fact: IN-041}
+    - {text: 平坦型・陥凹型の腫瘍性病変は、5 mm以下であれば経過観察とする。, truth: false, fact: IN-036}
+    - {text: 6 mm以上の腺腫性病変には、内視鏡的切除が強く推奨される。, truth: true, fact: IN-036}
+  status: draft
+
+- id: Q-IN-008
+  ask: true
+  stem: 大腸癌について正しいのはどれか。
+  options:
+    - {text: T1大腸癌はリンパ節転移を起こさない。, truth: false, fact: IN-048}
+    - {text: 市町村が行う大腸がん検診は、40歳以上を対象に年1回、便潜血検査を行う。, truth: true, fact: IN-056}
+    - {text: 内視鏡で取り切れたT1癌は経過観察が不要である。, truth: false, fact: IN-042}
+    - {text: Lynch症候群の拾い上げは若年発症の大腸癌に限って行う。, truth: false, fact: IN-058}
+    - {text: 直腸癌の側方リンパ節郭清はすべての直腸癌に行う。, truth: false, fact: IN-049}
+  status: draft
+
+- id: Q-IN-009
+  ask: true
+  stem: Clostridioides difficile感染症（CDI）について正しいのはどれか。
+  options:
+    - {text: 治療後は便検査で陰性を確認する。, truth: false, fact: IN-081}
+    - {text: 治療にはバンコマイシンを静注する。, truth: false, fact: IN-083}
+    - {text: 院内でしか発症しない。, truth: false, fact: IN-080}
+    - {text: 芽胞はアルコールを含む手指消毒剤では死滅しない。, truth: true, fact: IN-082}
+    - {text: IDSA/SHEAの2021年改訂は、成人の初回CDIにメトロニダゾールを第一選択としている。, truth: false, fact: IN-084}
+  status: draft
+
+- id: Q-IN-010
+  ask: true
+  stem: 感染性腸炎について正しいのはどれか。
+  options:
+    - {text: 腸管出血性大腸菌感染症では高熱が続くのが典型である。, truth: false, fact: IN-070}
+    - {text: 溶血性尿毒症症候群（HUS）は、下痢の発症と同時に起こることが多い。, truth: false, fact: IN-071}
+    - {text: ノロウイルスは、症状が治まれば便中に排泄されない。, truth: false, fact: IN-077}
+    - {text: ノロウイルスの吐物の処理には、次亜塩素酸ナトリウムより消毒用アルコールが適する。, truth: false, fact: IN-078}
+    - {text: カンピロバクター感染の数週間後に、Guillain-Barré症候群を起こすことがある。, truth: true, fact: IN-075}
+  status: draft
+
+- id: Q-ES-001
+  ask: true
+  stem: 日本の食道癌について正しいのはどれか。
+  options:
+    - {text: 組織型は扁平上皮癌が大部分を占める。, truth: true, fact: ES-037}
+    - {text: 女性に多い。, truth: false, fact: ES-037}
+    - {text: 占居部位で最も多いのは頸部食道である。, truth: false, fact: ES-037}
+    - {text: 習慣的な飲酒は危険因子ではない。, truth: false, fact: ES-038}
+    - {text: 同時性・異時性の多重癌を伴うことはまれである。, truth: false, fact: ES-041}
+  status: draft
+
+- id: Q-ES-002
+  ask: true
+  stem: 食道癌の危険因子と組織型について正しいのはどれか。
+  options:
+    - {text: 食道腺癌はBarrett上皮と無関係に発生する。, truth: false, fact: ES-039}
+    - {text: 飲酒で生じるアセトアルデヒドは、WHOの作業部会で発がん性があると判断されていない。, truth: false, fact: ES-040}
+    - {text: 欧米では食道癌に占める腺癌の割合が増えている。, truth: true, fact: ES-039}
+    - {text: 緑黄色野菜と果物の摂取は危険因子である。, truth: false, fact: ES-038}
+    - {text: ALDH2の不活性型などの遺伝要因は、飲酒による発癌リスクに影響しない。, truth: false, fact: ES-040}
+  status: draft
+
+- id: Q-ES-003
+  ask: true
+  stem: 胃食道逆流症（GERD）について正しいのはどれか。
+  options:
+    - {text: ボノプラザンはプロトンポンプ阻害薬（PPI）の一種である。, truth: false, fact: ES-002}
+    - {text: PPIテストで症状が改善すればGERDと確定できる。, truth: false, fact: ES-010}
+    - {text: 日本では、重症逆流性食道炎の基準としてロサンゼルス（LA）分類のC・Dを用いる。, truth: true, fact: ES-006}
+    - {text: 24時間pH検査だけで非酸逆流も評価できる。, truth: false, fact: ES-008}
+    - {text: GERDは内視鏡でびらんを認める病態に限られる。, truth: false, fact: ES-001}
+  status: draft
+
+- id: Q-ES-004
+  ask: true
+  stem: 米国消化器病学会（ACG）2022のBarrett食道の扱いについて正しいのはどれか。
+  options:
+    - {text: 異形成のないBarrett食道は毎年内視鏡で経過観察する。, truth: false, fact: ES-016}
+    - {text: 生検は炎症の強い時期に行う。, truth: false, fact: ES-017}
+    - {text: 低異型度異形成の発癌率は、異形成のないものより低い。, truth: false, fact: ES-014}
+    - {text: 診断には、食道胃接合部より口側に1 cm以上の円柱上皮があり、生検で腸上皮化生を認めることを求める。, truth: true, fact: ES-013}
+    - {text: 日本人のBarrett食道の発癌率は欧米と同程度であることが示されている。, truth: false, fact: ES-015}
+  status: draft
+
+- id: Q-ES-005
+  ask: true
+  stem: 好酸球性食道炎（EoE）について正しいのはどれか。
+  options:
+    - {text: PPIで改善した例はEoEではない。, truth: false, fact: ES-019}
+    - {text: 好酸球増多をきたす他の疾患を除外する必要はない。, truth: false, fact: ES-018}
+    - {text: 典型的な内視鏡所見は、深い打ち抜き様の潰瘍である。, truth: false, fact: ES-021}
+    - {text: 12歳以上のEoEでは、デュピルマブはプラセボに比べて組織学的寛解率を高めなかった。, truth: false, fact: ES-023}
+    - {text: 診断基準の一つに、食道生検で上皮内の好酸球が15個/HPF以上であることがある。, truth: true, fact: ES-018}
+  status: draft
+
+- id: Q-ES-006
+  ask: true
+  stem: 食道アカラシアと食道運動障害について正しいのはどれか。
+  options:
+    - {text: POEMの後に逆流性食道炎は起こらない。, truth: false, fact: ES-033}
+    - {text: III型アカラシアには空気圧拡張術が最も有効である。, truth: false, fact: ES-034}
+    - {text: POEMは、腹腔鏡下Heller筋層切開術＋Dor噴門形成術に対して、2年時の治療成功で非劣性を示した。, truth: true, fact: ES-032}
+    - {text: オピオイドは高解像度食道内圧検査（HRM）の所見に影響しない。, truth: false, fact: ES-031}
+    - {text: 遠位食道痙攣ではIRP中央値が上昇する。, truth: false, fact: ES-028}
+  status: draft
+
+- id: Q-ES-007
+  ask: true
+  stem: 肝硬変患者の急性食道静脈瘤出血について正しいのはどれか。
+  options:
+    - {text: 血管作動薬は、内視鏡で出血を確認してから開始する。, truth: false, fact: ES-062}
+    - {text: 予防的に抗菌薬を投与する。, truth: true, fact: ES-062}
+    - {text: 内視鏡は全身状態が安定してから数日後に行う。, truth: false, fact: ES-062}
+    - {text: 輸血はHb 9 g/dL未満で行う戦略の方が、7 g/dL未満で行う戦略より転帰が良い。, truth: false, fact: ES-063}
+    - {text: Child-Pugh Cの例は、早期（先制的）TIPSの対象にならない。, truth: false, fact: ES-064}
+  status: draft
+
+- id: Q-ES-008
+  ask: true
+  stem: 肝硬変の門脈圧亢進症について正しいのはどれか。
+  options:
+    - {text: 静脈瘤がなければ、臨床的に有意な門脈圧亢進症（CSPH）ではない。, truth: false, fact: ES-057}
+    - {text: CSPHは肝静脈圧較差（HVPG）10 mmHg以上で定義される。, truth: true, fact: ES-057}
+    - {text: CSPHのある代償性肝硬変に非選択的β遮断薬を使う目的は、出血予防に限られる。, truth: false, fact: ES-058}
+    - {text: Baveno VIIは、非選択的β遮断薬のうちプロプラノロールをカルベジロールより優先している。, truth: false, fact: ES-058}
+    - {text: Child-Pugh 14点以上の最重症例は、先制的TIPSのよい適応である。, truth: false, fact: ES-064}
+  status: draft
+
+- id: Q-ES-009
+  ask: true
+  stem: 食道の良性疾患について正しいのはどれか。
+  options:
+    - {text: Plummer-Vinson症候群では、鉄欠乏を補正すれば経過観察は不要である。, truth: false, fact: ES-082}
+    - {text: Mallory-Weiss症候群は、全例で内視鏡的止血を要する。, truth: false, fact: ES-084}
+    - {text: 食道破裂を疑って食道造影を行う場合は、バリウムを用いる。, truth: false, fact: ES-086}
+    - {text: 食道裂孔ヘルニアで最も多いのは傍食道型である。, truth: false, fact: ES-076}
+    - {text: Zenker憩室の治療では、輪状咽頭筋の切開が要点である。, truth: true, fact: ES-083}
+  status: draft
+
+- id: Q-ES-010
+  ask: true
+  stem: ウイルス・真菌による食道炎について正しいのはどれか。
+  options:
+    - {text: 単純ヘルペスウイルス（HSV）食道炎の典型的な所見は、深い打ち抜き様の潰瘍である。, truth: false, fact: ES-080}
+    - {text: カンジダ食道炎は免疫不全者にしか起こらない。, truth: false, fact: ES-078}
+    - {text: サイトメガロウイルス（CMV）食道炎の治療薬はガンシクロビルである。, truth: true, fact: ES-081}
+    - {text: HSV食道炎にアシクロビルは無効である。, truth: false, fact: ES-081}
+    - {text: CMV食道炎は孤立性の小水疱を特徴とする。, truth: false, fact: ES-080}
+  status: draft
