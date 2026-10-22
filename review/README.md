@@ -1,6 +1,6 @@
 # 問題の監修（GitHub 版）
 
-更新：2026-10-21（`python tools/make_review_pages.py` で作り直す。手で編集しない）
+更新：2026-10-22（`python tools/make_review_pages.py` で作り直す。手で編集しない）
 
 ## 監修のしかた
 
