@@ -1,7 +1,7 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-10-29 13:25",
- "facts_revision": "cde4527",
+ "built_at": "2026-10-30 08:04",
+ "facts_revision": "0911764",
  "domains": {
   "HP": "H. pylori関連疾患",
   "UG": "上部消化管出血",
@@ -67,7 +67,14 @@ window.MCQ_DATA = {
   "OS": "上肢・下肢の運動器疾患、非感染性骨・関節・四肢軟部疾患",
   "BO": "骨・軟部腫瘍と類似疾患",
   "TJ": "神経・運動器の外傷",
-  "AN": "水頭症、脳・脊髄の形成異常、神経皮膚症候群、脳性麻痺"
+  "AN": "水頭症、脳・脊髄の形成異常、神経皮膚症候群、脳性麻痺",
+  "VI": "ウイルス感染症（急性・小児・全身性）",
+  "HV": "ウイルス感染症（ヘルペス群・慢性・新興）",
+  "CM": "クラミジア・マイコプラズマ・リケッチアによる感染症",
+  "BA": "細菌による感染症（抗酸菌を除く）",
+  "MY": "抗酸菌による感染症",
+  "FG": "真菌、寄生虫、その他の病原体による感染症",
+  "IG": "感染症の総論（横断：敗血症・抗菌薬・感染対策など）"
  },
  "fields": {
   "HP": "消化器",
@@ -134,7 +141,14 @@ window.MCQ_DATA = {
   "OS": "神経・運動器",
   "BO": "神経・運動器",
   "TJ": "神経・運動器",
-  "AN": "神経・運動器"
+  "AN": "神経・運動器",
+  "VI": "感染症",
+  "HV": "感染症",
+  "CM": "感染症",
+  "BA": "感染症",
+  "MY": "感染症",
+  "FG": "感染症",
+  "IG": "感染症"
  },
  "items": [
   {
@@ -1432,7 +1446,7 @@ window.MCQ_DATA = {
    "key": 3,
    "kokushi": "医学各論 Ⅻ-2-B-㉑（クロストリジウム・ディフィシル腸炎、a）；医学各論 Ⅵ-3-B-③（薬物性腸炎（備考：偽膜性腸炎）、a）",
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-270 (id: Jlvnl4s)",
-   "bp": "bp:Ⅵ-3",
+   "bp": "bp:Ⅻ-2",
    "cc": "core:消化器系:小腸・大腸疾患",
    "level": "a",
    "basic": false,
@@ -1927,9 +1941,9 @@ window.MCQ_DATA = {
    "key": 2,
    "kokushi": "医学各論 Ⅻ-1-A-⑩（単純ヘルペスウイルス感染症、a）；医学各論 Ⅻ-1-A-⑭（サイトメガロウイルス感染症、a）",
    "core": "PS-02-08-05 (id: JkxnuRY)",
-   "bp": "",
-   "cc": "",
-   "level": "",
+   "bp": "bp:Ⅻ-1",
+   "cc": "core:感染症:ワクチン予防可能な疾患",
+   "level": "a",
    "basic": false,
    "subdomain": "その他の食道疾患",
    "status": "draft",
@@ -3531,8 +3545,8 @@ window.MCQ_DATA = {
     "label": "医学各論 Ⅵ-3 小腸・結腸疾患",
     "group": "Ⅵ 消化器・腹壁・腹膜疾患",
     "weight": 1.3595,
-    "questions": 8,
-    "cards": 70,
+    "questions": 7,
+    "cards": 58,
     "draft_cards": 0
    },
    {
@@ -3615,6 +3629,42 @@ window.MCQ_DATA = {
     "questions": 0,
     "cards": 0,
     "draft_cards": 0
+   },
+   {
+    "id": "bp:Ⅻ-1",
+    "label": "医学各論 Ⅻ-1 ウイルス",
+    "group": "Ⅻ 感染性疾患",
+    "weight": 2.7163,
+    "questions": 1,
+    "cards": 6,
+    "draft_cards": 59
+   },
+   {
+    "id": "bp:Ⅻ-2",
+    "label": "医学各論 Ⅻ-2 細菌",
+    "group": "Ⅻ 感染性疾患",
+    "weight": 3.7209,
+    "questions": 1,
+    "cards": 9,
+    "draft_cards": 71
+   },
+   {
+    "id": "bp:Ⅻ-3",
+    "label": "医学各論 Ⅻ-3 抗酸菌<マイコバクテリア>",
+    "group": "Ⅻ 感染性疾患",
+    "weight": 0.2605,
+    "questions": 0,
+    "cards": 0,
+    "draft_cards": 6
+   },
+   {
+    "id": "bp:Ⅻ-4",
+    "label": "医学各論 Ⅻ-4 真菌、寄生虫、その他の病原体",
+    "group": "Ⅻ 感染性疾患",
+    "weight": 1.3023,
+    "questions": 0,
+    "cards": 0,
+    "draft_cards": 22
    }
   ],
   "core": [
@@ -3691,6 +3741,42 @@ window.MCQ_DATA = {
     "draft_cards": 23
    },
    {
+    "id": "core:感染症:市中感染症",
+    "label": "感染症：市中感染症",
+    "group": "感染症",
+    "weight": 12,
+    "questions": 0,
+    "cards": 0,
+    "draft_cards": 70
+   },
+   {
+    "id": "core:感染症:医療関連感染",
+    "label": "感染症：医療関連感染",
+    "group": "感染症",
+    "weight": 8,
+    "questions": 0,
+    "cards": 0,
+    "draft_cards": 8
+   },
+   {
+    "id": "core:感染症:免疫不全",
+    "label": "感染症：免疫不全",
+    "group": "感染症",
+    "weight": 8,
+    "questions": 0,
+    "cards": 0,
+    "draft_cards": 26
+   },
+   {
+    "id": "core:感染症:ワクチン予防可能な疾患",
+    "label": "感染症：ワクチン予防可能な疾患",
+    "group": "感染症",
+    "weight": 11,
+    "questions": 1,
+    "cards": 2,
+    "draft_cards": 66
+   },
+   {
     "id": "core:消化器系:構造と機能",
     "label": "消化器系：構造と機能",
     "group": "消化器系",
@@ -3714,7 +3800,7 @@ window.MCQ_DATA = {
     "group": "消化器系",
     "weight": 5,
     "questions": 0,
-    "cards": 1,
+    "cards": 0,
     "draft_cards": 13
    },
    {
@@ -3725,6 +3811,15 @@ window.MCQ_DATA = {
     "questions": 0,
     "cards": 0,
     "draft_cards": 11
+   },
+   {
+    "id": "core:感染症:症候",
+    "label": "感染症：症候",
+    "group": "感染症",
+    "weight": 28,
+    "questions": 0,
+    "cards": 0,
+    "draft_cards": 1
    }
   ]
  }
