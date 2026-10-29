@@ -1,7 +1,7 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-10-29 07:56",
- "facts_revision": "8b8d037",
+ "built_at": "2026-10-29 13:25",
+ "facts_revision": "cde4527",
  "domains": {
   "HP": "H. pylori関連疾患",
   "UG": "上部消化管出血",
@@ -3514,7 +3514,7 @@ window.MCQ_DATA = {
     "group": "Ⅵ 消化器・腹壁・腹膜疾患",
     "weight": 0.8072,
     "questions": 6,
-    "cards": 42,
+    "cards": 41,
     "draft_cards": 21
    },
    {
@@ -3624,7 +3624,7 @@ window.MCQ_DATA = {
     "group": "消化器系",
     "weight": 9,
     "questions": 6,
-    "cards": 42,
+    "cards": 41,
     "draft_cards": 21
    },
    {
