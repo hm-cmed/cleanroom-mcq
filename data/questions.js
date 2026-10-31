@@ -1,7 +1,7 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-10-31 07:58",
- "facts_revision": "64374dc",
+ "built_at": "2026-11-01 07:08",
+ "facts_revision": "2d14620",
  "domains": {
   "HP": "H. pylori関連疾患",
   "UG": "上部消化管出血",
@@ -107,7 +107,8 @@ window.MCQ_DATA = {
   "SM": "喫煙による障害",
   "OC": "産業中毒とその他の職業性疾患",
   "EV": "物理的原因・生活環境因子による障害",
-  "OX": "生活環境・職業性の横断項目"
+  "OX": "生活環境・職業性の横断項目",
+  "PE": "小児外科（消化器の小児外科疾患）"
  },
  "fields": {
   "HP": "消化器",
@@ -214,7 +215,8 @@ window.MCQ_DATA = {
   "SM": "生活環境・職業性",
   "OC": "生活環境・職業性",
   "EV": "生活環境・職業性",
-  "OX": "生活環境・職業性"
+  "OX": "生活環境・職業性",
+  "PE": "消化器"
  },
  "items": [
   {
@@ -475,7 +477,7 @@ window.MCQ_DATA = {
     }
    ],
    "key": 0,
-   "kokushi": "医学各論 Ⅵ-6-B-①（急性肝炎、a）",
+   "kokushi": "医学各論 Ⅵ-6-B-①（急性肝炎、a）；医学各論 Ⅻ-1-A-⑰（ウイルス性肝炎、a）",
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-01-00-282 (id: Jlvnl50)；TBL-01-00-285 (id: Jlvnl6Q)",
    "bp": "bp:Ⅵ-6",
    "cc": "core:消化器系:肝疾患",
@@ -610,7 +612,7 @@ window.MCQ_DATA = {
     }
    ],
    "key": 3,
-   "kokushi": "医学各論 Ⅵ-6-E-①（ビリルビン代謝の異常、a）",
+   "kokushi": "医学各論 Ⅵ-6-E-①（ビリルビン代謝の異常、a）；医学各論 Ⅵ-12-E-②（体質性黄疸、b）；医学各論 Ⅹ-9-D-①（体質性黄疸、b）",
    "core": "PS-02-08-05 (id: JkxnuRY)；TBL-02-07-023 (id: JlAKpks)",
    "bp": "bp:Ⅵ-6",
    "cc": "core:消化器系:肝疾患",
@@ -1060,7 +1062,7 @@ window.MCQ_DATA = {
     }
    ],
    "key": 2,
-   "kokushi": "医学各論 Ⅵ-2-D-①（胃ポリープ、a）",
+   "kokushi": "医学各論 Ⅵ-2-D-①（胃ポリープ、a）；医学各論 Ⅵ-2-D-③（胃腺腫、b）",
    "core": "PS-02-08-05 (id: JkxnuRY)",
    "bp": "bp:Ⅵ-2",
    "cc": "core:消化器系:胃・十二指腸疾患",
@@ -3604,7 +3606,7 @@ window.MCQ_DATA = {
     "weight": 1.402,
     "questions": 7,
     "cards": 76,
-    "draft_cards": 15
+    "draft_cards": 19
    },
    {
     "id": "bp:Ⅵ-3",
@@ -3613,7 +3615,7 @@ window.MCQ_DATA = {
     "weight": 1.3595,
     "questions": 6,
     "cards": 56,
-    "draft_cards": 0
+    "draft_cards": 12
    },
    {
     "id": "bp:Ⅵ-4",
@@ -3622,7 +3624,7 @@ window.MCQ_DATA = {
     "weight": 0.6373,
     "questions": 0,
     "cards": 4,
-    "draft_cards": 0
+    "draft_cards": 9
    },
    {
     "id": "bp:Ⅵ-5",
@@ -3631,7 +3633,7 @@ window.MCQ_DATA = {
     "weight": 0.8497,
     "questions": 6,
     "cards": 35,
-    "draft_cards": 5
+    "draft_cards": 13
    },
    {
     "id": "bp:Ⅵ-6",
@@ -3640,7 +3642,7 @@ window.MCQ_DATA = {
     "weight": 2.1667,
     "questions": 11,
     "cards": 106,
-    "draft_cards": 1
+    "draft_cards": 7
    },
    {
     "id": "bp:Ⅵ-7",
@@ -3649,7 +3651,7 @@ window.MCQ_DATA = {
     "weight": 0.8072,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 28
+    "draft_cards": 35
    },
    {
     "id": "bp:Ⅵ-8",
@@ -3667,7 +3669,7 @@ window.MCQ_DATA = {
     "weight": 0.9771,
     "questions": 0,
     "cards": 1,
-    "draft_cards": 15
+    "draft_cards": 25
    },
    {
     "id": "bp:Ⅵ-10",
@@ -3676,7 +3678,7 @@ window.MCQ_DATA = {
     "weight": 1.0196,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 0
+    "draft_cards": 17
    },
    {
     "id": "bp:Ⅵ-11",
@@ -3685,7 +3687,7 @@ window.MCQ_DATA = {
     "weight": 0.8072,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 0
+    "draft_cards": 13
    },
    {
     "id": "bp:Ⅵ-12",
@@ -3694,7 +3696,7 @@ window.MCQ_DATA = {
     "weight": 1.5294,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 0
+    "draft_cards": 41
    },
    {
     "id": "bp:Ⅻ-1",
@@ -3739,7 +3741,7 @@ window.MCQ_DATA = {
     "weight": 0.4573,
     "questions": 1,
     "cards": 3,
-    "draft_cards": 0
+    "draft_cards": 13
    },
    {
     "id": "bp:ⅩⅢ-2",
@@ -3748,7 +3750,7 @@ window.MCQ_DATA = {
     "weight": 0.9756,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 0
+    "draft_cards": 19
    },
    {
     "id": "bp:ⅩⅢ-3",
@@ -3757,7 +3759,7 @@ window.MCQ_DATA = {
     "weight": 0.3659,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 0
+    "draft_cards": 9
    },
    {
     "id": "bp:ⅩⅢ-4",
@@ -3766,7 +3768,7 @@ window.MCQ_DATA = {
     "weight": 1.6159,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 0
+    "draft_cards": 23
    },
    {
     "id": "bp:ⅩⅢ-5",
@@ -3775,7 +3777,7 @@ window.MCQ_DATA = {
     "weight": 1.5854,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 0
+    "draft_cards": 24
    }
   ],
   "core": [
@@ -3795,7 +3797,7 @@ window.MCQ_DATA = {
     "weight": 13,
     "questions": 7,
     "cards": 76,
-    "draft_cards": 13
+    "draft_cards": 19
    },
    {
     "id": "core:消化器系:小腸・大腸疾患",
@@ -3804,7 +3806,7 @@ window.MCQ_DATA = {
     "weight": 27,
     "questions": 10,
     "cards": 80,
-    "draft_cards": 127
+    "draft_cards": 148
    },
    {
     "id": "core:消化器系:消化管共通疾患",
@@ -3813,7 +3815,7 @@ window.MCQ_DATA = {
     "weight": 4,
     "questions": 4,
     "cards": 28,
-    "draft_cards": 5
+    "draft_cards": 8
    },
    {
     "id": "core:消化器系:肝疾患",
@@ -3822,7 +3824,7 @@ window.MCQ_DATA = {
     "weight": 30,
     "questions": 11,
     "cards": 106,
-    "draft_cards": 5
+    "draft_cards": 12
    },
    {
     "id": "core:消化器系:胆道疾患",
@@ -3831,7 +3833,7 @@ window.MCQ_DATA = {
     "weight": 10,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 24
+    "draft_cards": 31
    },
    {
     "id": "core:消化器系:膵臓疾患",
@@ -3849,7 +3851,7 @@ window.MCQ_DATA = {
     "weight": 5,
     "questions": 0,
     "cards": 1,
-    "draft_cards": 23
+    "draft_cards": 35
    },
    {
     "id": "core:感染症:市中感染症",
@@ -3903,7 +3905,7 @@ window.MCQ_DATA = {
     "weight": 11,
     "questions": 0,
     "cards": 1,
-    "draft_cards": 132
+    "draft_cards": 130
    },
    {
     "id": "core:消化器系:検査方法",
@@ -3930,7 +3932,7 @@ window.MCQ_DATA = {
     "weight": 28,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 1
+    "draft_cards": 7
    }
   ]
  }
