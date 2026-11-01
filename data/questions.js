@@ -1,7 +1,7 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-11-01 07:08",
- "facts_revision": "2d14620",
+ "built_at": "2026-11-02 07:34",
+ "facts_revision": "3a9ee7c",
  "domains": {
   "HP": "H. pylori関連疾患",
   "UG": "上部消化管出血",
@@ -3597,7 +3597,7 @@ window.MCQ_DATA = {
     "weight": 0.8072,
     "questions": 6,
     "cards": 41,
-    "draft_cards": 21
+    "draft_cards": 22
    },
    {
     "id": "bp:Ⅵ-2",
@@ -3606,7 +3606,7 @@ window.MCQ_DATA = {
     "weight": 1.402,
     "questions": 7,
     "cards": 76,
-    "draft_cards": 19
+    "draft_cards": 37
    },
    {
     "id": "bp:Ⅵ-3",
@@ -3615,7 +3615,7 @@ window.MCQ_DATA = {
     "weight": 1.3595,
     "questions": 6,
     "cards": 56,
-    "draft_cards": 12
+    "draft_cards": 77
    },
    {
     "id": "bp:Ⅵ-4",
@@ -3624,7 +3624,7 @@ window.MCQ_DATA = {
     "weight": 0.6373,
     "questions": 0,
     "cards": 4,
-    "draft_cards": 9
+    "draft_cards": 10
    },
    {
     "id": "bp:Ⅵ-5",
@@ -3633,7 +3633,7 @@ window.MCQ_DATA = {
     "weight": 0.8497,
     "questions": 6,
     "cards": 35,
-    "draft_cards": 13
+    "draft_cards": 14
    },
    {
     "id": "bp:Ⅵ-6",
@@ -3642,7 +3642,7 @@ window.MCQ_DATA = {
     "weight": 2.1667,
     "questions": 11,
     "cards": 106,
-    "draft_cards": 7
+    "draft_cards": 12
    },
    {
     "id": "bp:Ⅵ-7",
@@ -3651,7 +3651,7 @@ window.MCQ_DATA = {
     "weight": 0.8072,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 35
+    "draft_cards": 36
    },
    {
     "id": "bp:Ⅵ-8",
@@ -3660,7 +3660,7 @@ window.MCQ_DATA = {
     "weight": 0.6373,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 40
+    "draft_cards": 41
    },
    {
     "id": "bp:Ⅵ-9",
@@ -3669,7 +3669,7 @@ window.MCQ_DATA = {
     "weight": 0.9771,
     "questions": 0,
     "cards": 1,
-    "draft_cards": 25
+    "draft_cards": 28
    },
    {
     "id": "bp:Ⅵ-10",
@@ -3678,7 +3678,7 @@ window.MCQ_DATA = {
     "weight": 1.0196,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 17
+    "draft_cards": 23
    },
    {
     "id": "bp:Ⅵ-11",
@@ -3687,7 +3687,7 @@ window.MCQ_DATA = {
     "weight": 0.8072,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 13
+    "draft_cards": 14
    },
    {
     "id": "bp:Ⅵ-12",
@@ -3696,7 +3696,7 @@ window.MCQ_DATA = {
     "weight": 1.5294,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 41
+    "draft_cards": 44
    },
    {
     "id": "bp:Ⅻ-1",
@@ -3705,7 +3705,7 @@ window.MCQ_DATA = {
     "weight": 2.7163,
     "questions": 1,
     "cards": 5,
-    "draft_cards": 59
+    "draft_cards": 61
    },
    {
     "id": "bp:Ⅻ-2",
@@ -3714,7 +3714,7 @@ window.MCQ_DATA = {
     "weight": 3.7209,
     "questions": 1,
     "cards": 9,
-    "draft_cards": 71
+    "draft_cards": 80
    },
    {
     "id": "bp:Ⅻ-3",
@@ -3759,7 +3759,7 @@ window.MCQ_DATA = {
     "weight": 0.3659,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 9
+    "draft_cards": 13
    },
    {
     "id": "bp:ⅩⅢ-4",
@@ -3768,7 +3768,7 @@ window.MCQ_DATA = {
     "weight": 1.6159,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 23
+    "draft_cards": 26
    },
    {
     "id": "bp:ⅩⅢ-5",
@@ -3777,7 +3777,7 @@ window.MCQ_DATA = {
     "weight": 1.5854,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 24
+    "draft_cards": 32
    }
   ],
   "core": [
@@ -3788,7 +3788,7 @@ window.MCQ_DATA = {
     "weight": 9,
     "questions": 6,
     "cards": 41,
-    "draft_cards": 21
+    "draft_cards": 22
    },
    {
     "id": "core:消化器系:胃・十二指腸疾患",
@@ -3797,7 +3797,7 @@ window.MCQ_DATA = {
     "weight": 13,
     "questions": 7,
     "cards": 76,
-    "draft_cards": 19
+    "draft_cards": 37
    },
    {
     "id": "core:消化器系:小腸・大腸疾患",
@@ -3806,7 +3806,7 @@ window.MCQ_DATA = {
     "weight": 27,
     "questions": 10,
     "cards": 80,
-    "draft_cards": 148
+    "draft_cards": 157
    },
    {
     "id": "core:消化器系:消化管共通疾患",
@@ -3815,7 +3815,7 @@ window.MCQ_DATA = {
     "weight": 4,
     "questions": 4,
     "cards": 28,
-    "draft_cards": 8
+    "draft_cards": 9
    },
    {
     "id": "core:消化器系:肝疾患",
@@ -3824,7 +3824,7 @@ window.MCQ_DATA = {
     "weight": 30,
     "questions": 11,
     "cards": 106,
-    "draft_cards": 12
+    "draft_cards": 16
    },
    {
     "id": "core:消化器系:胆道疾患",
@@ -3833,7 +3833,7 @@ window.MCQ_DATA = {
     "weight": 10,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 31
+    "draft_cards": 33
    },
    {
     "id": "core:消化器系:膵臓疾患",
@@ -3842,7 +3842,7 @@ window.MCQ_DATA = {
     "weight": 9,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 40
+    "draft_cards": 41
    },
    {
     "id": "core:消化器系:腹膜・腹壁・横隔膜疾患",
@@ -3851,7 +3851,7 @@ window.MCQ_DATA = {
     "weight": 5,
     "questions": 0,
     "cards": 1,
-    "draft_cards": 35
+    "draft_cards": 41
    },
    {
     "id": "core:感染症:市中感染症",
@@ -3860,7 +3860,7 @@ window.MCQ_DATA = {
     "weight": 12,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 70
+    "draft_cards": 78
    },
    {
     "id": "core:感染症:医療関連感染",
@@ -3878,7 +3878,7 @@ window.MCQ_DATA = {
     "weight": 8,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 26
+    "draft_cards": 27
    },
    {
     "id": "core:感染症:ワクチン予防可能な疾患",
@@ -3905,7 +3905,7 @@ window.MCQ_DATA = {
     "weight": 11,
     "questions": 0,
     "cards": 1,
-    "draft_cards": 130
+    "draft_cards": 113
    },
    {
     "id": "core:消化器系:検査方法",
@@ -3914,7 +3914,7 @@ window.MCQ_DATA = {
     "weight": 5,
     "questions": 0,
     "cards": 0,
-    "draft_cards": 13
+    "draft_cards": 10
    },
    {
     "id": "core:消化器系:特異的治療法",
