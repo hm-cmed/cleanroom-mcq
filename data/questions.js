@@ -1,7 +1,7 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-11-10 10:50",
- "facts_revision": "eded896",
+ "built_at": "2026-11-11 08:52",
+ "facts_revision": "c445bca",
  "domains": {
   "HP": "H. pylori関連疾患",
   "UG": "上部消化管出血",
