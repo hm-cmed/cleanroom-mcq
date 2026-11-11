@@ -1,7 +1,7 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-11-11 08:52",
- "facts_revision": "c445bca",
+ "built_at": "2026-11-12 04:05",
+ "facts_revision": "3b8c610",
  "domains": {
   "HP": "H. pylori関連疾患",
   "UG": "上部消化管出血",
@@ -2675,7 +2675,7 @@ window.MCQ_DATA = {
    "doi": "10.3201/eid2810.220627",
    "pmid": "36148963",
    "url": "https://wwwnc.cdc.gov/eid/article/28/10/22-0627_article",
-   "source_class": "GOV_US",
+   "source_class": "OPEN",
    "status": "verified_sources"
   },
   "GD-086": {
@@ -2756,7 +2756,7 @@ window.MCQ_DATA = {
    "doi": "10.47717/turkjsurg.2026.2025-11-25",
    "pmid": "42100946",
    "url": "https://turkjsurg.com/articles/doi/turkjsurg.2026.2025-11-25",
-   "source_class": "UNKNOWN",
+   "source_class": "RESTRICTED",
    "status": "verified_sources"
   },
   "IN-001": {
@@ -3431,7 +3431,7 @@ window.MCQ_DATA = {
    "doi": "10.1007/s00535-012-0624-x",
    "pmid": "22825549",
    "url": "https://link.springer.com/doi/10.1007/s00535-012-0624-x",
-   "source_class": "UNKNOWN",
+   "source_class": "OPEN",
    "status": "verified_sources"
   },
   "LV-069": {
@@ -3440,7 +3440,7 @@ window.MCQ_DATA = {
    "doi": "10.1007/s00535-012-0624-x",
    "pmid": "22825549",
    "url": "https://link.springer.com/doi/10.1007/s00535-012-0624-x",
-   "source_class": "UNKNOWN",
+   "source_class": "OPEN",
    "status": "verified_sources"
   },
   "LV-070": {
@@ -3449,7 +3449,7 @@ window.MCQ_DATA = {
    "doi": "10.1007/s00535-012-0624-x",
    "pmid": "22825549",
    "url": "https://link.springer.com/doi/10.1007/s00535-012-0624-x",
-   "source_class": "UNKNOWN",
+   "source_class": "OPEN",
    "status": "verified_sources"
   },
   "LV-076": {
