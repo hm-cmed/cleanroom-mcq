@@ -1,7 +1,7 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-11-13 04:05",
- "facts_revision": "3b8c610",
+ "built_at": "2026-11-14 04:05",
+ "facts_revision": "ef5e724",
  "domains": {
   "HP": "H. pylori関連疾患",
   "UG": "上部消化管出血",
@@ -2810,7 +2810,7 @@ window.MCQ_DATA = {
    "doi": "",
    "pmid": "",
    "url": "https://www.nanbyou.or.jp/entry/62",
-   "source_class": "UNKNOWN",
+   "source_class": "RESTRICTED",
    "status": "verified_sources"
   },
   "IN-012": {
@@ -2819,7 +2819,7 @@ window.MCQ_DATA = {
    "doi": "",
    "pmid": "",
    "url": "https://www.nanbyou.or.jp/entry/62",
-   "source_class": "UNKNOWN",
+   "source_class": "RESTRICTED",
    "status": "verified_sources"
   },
   "IN-013": {
@@ -2828,7 +2828,7 @@ window.MCQ_DATA = {
    "doi": "",
    "pmid": "",
    "url": "https://www.nanbyou.or.jp/entry/62",
-   "source_class": "UNKNOWN",
+   "source_class": "RESTRICTED",
    "status": "verified_sources"
   },
   "IN-015": {
@@ -2837,7 +2837,7 @@ window.MCQ_DATA = {
    "doi": "",
    "pmid": "",
    "url": "https://www.nanbyou.or.jp/entry/81",
-   "source_class": "UNKNOWN",
+   "source_class": "RESTRICTED",
    "status": "verified_sources"
   },
   "IN-018": {
