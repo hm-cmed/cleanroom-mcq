@@ -1,7 +1,7 @@
 // このファイルは tools/build.py が作ります。直接書き換えないでください。
 window.MCQ_DATA = {
- "built_at": "2026-11-23 04:04",
- "facts_revision": "10bc0a6",
+ "built_at": "2026-11-24 04:04",
+ "facts_revision": "0aa9933",
  "domains": {
   "HP": "H. pylori関連疾患",
   "UG": "上部消化管出血",
@@ -108,7 +108,8 @@ window.MCQ_DATA = {
   "OC": "産業中毒とその他の職業性疾患",
   "EV": "物理的原因・生活環境因子による障害",
   "OX": "生活環境・職業性の横断項目",
-  "PE": "小児外科（消化器の小児外科疾患）"
+  "PE": "小児外科（消化器の小児外科疾患）",
+  "ME": "医療者教育（卒前・卒後の養成制度、評価、教育手法、プロフェッショナリズム・安全・連携、教員と学習者）"
  },
  "fields": {
   "HP": "消化器",
@@ -216,7 +217,8 @@ window.MCQ_DATA = {
   "OC": "生活環境・職業性",
   "EV": "生活環境・職業性",
   "OX": "生活環境・職業性",
-  "PE": "消化器"
+  "PE": "消化器",
+  "ME": "医療者教育"
  },
  "items": [
   {
@@ -2076,7 +2078,7 @@ window.MCQ_DATA = {
    "status": "verified_sources"
   },
   "ES-014": {
-   "statement": "ACG 2022は、Barrett食道の癌への進展率を、異形成なし（NDBE）で年0.05〜0.2%程度、低異型度異形成（LGD）で年約0.7%と見積もっている。",
+   "statement": "ACG 2022は、Barrett食道の癌への進展率を、異形成なし（NDBE）で年0.05〜0.2%程度、低異型度異形成（LGD）で年約0.7%と見積もっている。進展率は対象集団や指標（癌への進展か、高異型度異形成への進展を含むか、異形成の発生か）によって大きく異なり、ほかの総説では別の指標で異なる値が報告されている。",
    "source": "Shaheen NJ, et al. ACG Barrett's Esophagus guideline. Am J Gastroenterol 2022;117:559-587",
    "doi": "10.14309/ajg.0000000000001680",
    "pmid": "35354777",
@@ -2095,15 +2097,15 @@ window.MCQ_DATA = {
   },
   "ES-016": {
    "statement": "ACG 2022は、NDBEのサーベイランス間隔を長さで分けている。3 cm未満は5年ごと、3 cm以上は3年ごとである。",
-   "source": "Shaheen NJ, et al. ACG Barrett's Esophagus guideline. Am J Gastroenterol 2022;117:559-587",
-   "doi": "10.14309/ajg.0000000000001680",
-   "pmid": "35354777",
-   "url": "",
-   "source_class": "RESTRICTED",
+   "source": "Stawinski PM, Dziadkowiec KN, Kuo LA, Echavarria J, Saligram S. Barrett's Esophagus: An Updated Review. Diagnostics. 2023;13(2):321",
+   "doi": "10.3390/diagnostics13020321",
+   "pmid": "36673131",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9858189/",
+   "source_class": "OPEN",
    "status": "verified_sources"
   },
   "ES-017": {
-   "statement": "ACGは、Barrett食道の生検について、炎症を制御してから2 cm間隔で4方向から系統的に行う方法（Seattle protocol）を標準としている。",
+   "statement": "ACGは、Barrett食道の生検について、炎症を制御してから一定の間隔（1〜2 cm）で4方向から系統的に行う方法（Seattle protocol）を標準としている。",
    "source": "Shaheen NJ, et al. ACG Barrett's Esophagus guideline. Am J Gastroenterol 2022;117:559-587",
    "doi": "10.14309/ajg.0000000000001680",
    "pmid": "35354777",
@@ -2113,11 +2115,11 @@ window.MCQ_DATA = {
   },
   "ES-018": {
    "statement": "EoEは、次の三つがそろったときに診断する。食道の機能障害による症状があること、食道生検で上皮内の好酸球が15個/HPF以上（約60個/mm²）であること、好酸球増多をきたす他の疾患を除外したことである。",
-   "source": "ACG Clinical Guideline: EoE. Am J Gastroenterol 2025",
-   "doi": "10.14309/ajg.0000000000003194",
-   "pmid": "39745304",
-   "url": "",
-   "source_class": "UNKNOWN",
+   "source": "Abe Y, et al. Endoscopic Diagnosis of Eosinophilic Esophagitis: Basics and Recent Advances. Diagnostics. 2022;12:3202",
+   "doi": "10.3390/diagnostics12123202",
+   "pmid": "36553209",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9777529/",
+   "source_class": "OPEN",
    "status": "verified_sources"
   },
   "ES-019": {
@@ -2131,11 +2133,11 @@ window.MCQ_DATA = {
   },
   "ES-021": {
    "statement": "EoEの典型的な内視鏡所見は、輪状溝、縦走溝、白斑（滲出物）、浮腫で、狭窄を伴うこともある。これらはEREFSで点数化する。",
-   "source": "Hirano I, et al. Endoscopic assessment of the oesophageal features of eosinophilic oesophagitis: validation of a novel classification and grading system. Gut 2013;62:489-495",
-   "doi": "10.1136/gutjnl-2011-301817",
-   "pmid": "22619364",
-   "url": "",
-   "source_class": "RESTRICTED",
+   "source": "Abe Y, et al. Endoscopic Diagnosis of Eosinophilic Esophagitis: Basics and Recent Advances. Diagnostics. 2022;12:3202",
+   "doi": "10.3390/diagnostics12123202",
+   "pmid": "36553209",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9777529/",
+   "source_class": "OPEN",
    "status": "verified_sources"
   },
   "ES-023": {
@@ -2239,11 +2241,11 @@ window.MCQ_DATA = {
   },
   "ES-057": {
    "statement": "臨床的に有意な門脈圧亢進症（CSPH）は、肝静脈圧較差（HVPG）10 mmHg以上で定義される。",
-   "source": "Kaplan DE, et al. AASLD Practice Guidance, portal hypertension and varices. Hepatology 2024;79:1180-1211",
-   "doi": "10.1097/HEP.0000000000000647",
-   "pmid": "37870298",
-   "url": "",
-   "source_class": "RESTRICTED",
+   "source": "Brown RS Jr, et al. Screening and management of portal hypertension and varices in cirrhosis: Expert perspectives. Hepatol Commun. 2025;9:e0682",
+   "doi": "10.1097/HC9.0000000000000682",
+   "pmid": "40178492",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11970884/",
+   "source_class": "OPEN",
    "status": "verified_sources"
   },
   "ES-058": {
@@ -2297,7 +2299,7 @@ window.MCQ_DATA = {
    "doi": "10.12998/wjcc.v10.i30.10896",
    "pmid": "36338217",
    "url": "",
-   "source_class": "UNKNOWN",
+   "source_class": "RESTRICTED",
    "status": "verified_sources"
   },
   "ES-080": {
@@ -2342,7 +2344,7 @@ window.MCQ_DATA = {
    "doi": "10.1097/MCG.0000000000001918",
    "pmid": "37668412",
    "url": "",
-   "source_class": "UNKNOWN",
+   "source_class": "RESTRICTED",
    "status": "verified_sources"
   },
   "ES-086": {

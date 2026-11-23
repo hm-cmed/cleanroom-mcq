@@ -1,6 +1,6 @@
 # 食道の問題の監修
 
-[← 一覧に戻る](README.md)　更新：2026-11-22
+[← 一覧に戻る](README.md)　更新：2026-11-23
 
 ### Q-ES-001　監修待ち
 
@@ -60,15 +60,15 @@
 - **a.** 異形成のないBarrett食道は毎年内視鏡で経過観察する。　— 誤った記述
   - 根拠 ES-016（カード：出典照合済み）：ACG 2022は、NDBEのサーベイランス間隔を長さで分けている。3 cm未満は5年ごと、3 cm以上は3年ごとである。
 - **b.** 生検は炎症の強い時期に行う。　— 誤った記述
-  - 根拠 ES-017（カード：出典照合済み）：ACGは、Barrett食道の生検について、炎症を制御してから2 cm間隔で4方向から系統的に行う方法（Seattle protocol）を標準としている。
+  - 根拠 ES-017（カード：出典照合済み）：ACGは、Barrett食道の生検について、炎症を制御してから一定の間隔（1〜2 cm）で4方向から系統的に行う方法（Seattle protocol）を標準としている。
 - **c.** 低異型度異形成の発癌率は、異形成のないものより低い。　— 誤った記述
-  - 根拠 ES-014（カード：出典照合済み）：ACG 2022は、Barrett食道の癌への進展率を、異形成なし（NDBE）で年0.05〜0.2%程度、低異型度異形成（LGD）で年約0.7%と見積もっている。
+  - 根拠 ES-014（カード：出典照合済み）：ACG 2022は、Barrett食道の癌への進展率を、異形成なし（NDBE）で年0.05〜0.2%程度、低異型度異形成（LGD）で年約0.7%と見積もっている。進展率は対象集団や指標（癌への進展か、高異型度異形成への進展を含むか、異形成の発生か）によって大きく異なり、ほかの総説では別の指標で異なる値が報告されている。
 - **d.** 診断には、食道胃接合部より口側に1 cm以上の円柱上皮があり、生検で腸上皮化生を認めることを求める。　— 正しい記述**（正答）**
   - 根拠 ES-013（カード：出典照合済み）：米国ACG 2022は、Barrett食道の診断に二つの条件を求める。食道胃接合部より口側の円柱上皮が1 cm以上あること、そして生検で腸上皮化生を認めることである。
 - **e.** 日本人のBarrett食道の発癌率は欧米と同程度であることが示されている。　— 誤った記述
   - 根拠 ES-015（カード：出典照合済み）：日本では、Barrett食道から食道癌が発生するリスクは、報告例が少ないため明らかになっていない。
 
-- [この問題を監修する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-review.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20Q-ES-004&question_id=Q-ES-004&version=097bffd824)　（版 `097bffd824`）
+- [この問題を監修する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-review.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20Q-ES-004&question_id=Q-ES-004&version=7ce7fc6c4d)　（版 `7ce7fc6c4d`）
 
 ### Q-ES-005　監修待ち
 
@@ -85,7 +85,7 @@
 - **e.** 診断基準の一つに、食道生検で上皮内の好酸球が15個/HPF以上であることがある。　— 正しい記述**（正答）**
   - 根拠 ES-018（カード：出典照合済み）：EoEは、次の三つがそろったときに診断する。食道の機能障害による症状があること、食道生検で上皮内の好酸球が15個/HPF以上（約60個/mm²）であること、好酸球増多をきたす他の疾患を除外したことである。
 
-- [この問題を監修する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-review.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20Q-ES-005&question_id=Q-ES-005&version=e2f0ea4215)　（版 `e2f0ea4215`）
+- [この問題を監修する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-review.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20Q-ES-005&question_id=Q-ES-005&version=b2f82a7de8)　（版 `b2f82a7de8`）
 
 ### Q-ES-006　監修待ち
 
@@ -136,7 +136,7 @@
 - **e.** Child-Pugh 14点以上の最重症例は、先制的TIPSのよい適応である。　— 誤った記述
   - 根拠 ES-064（カード：出典照合済み）：Baveno VIIは、出血リスクの高い症例に72時間以内（可能なら24時間以内）の先制的TIPSを勧めている。対象は、Child-Pugh Cで14点未満、内視鏡時に活動性出血のあるChild-Pugh Bで7点超、または出血時のHVPGが20 mmHg超の症例である。
 
-- [この問題を監修する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-review.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20Q-ES-008&question_id=Q-ES-008&version=71db33415b)　（版 `71db33415b`）
+- [この問題を監修する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-review.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20Q-ES-008&question_id=Q-ES-008&version=a65a4a9ac8)　（版 `a65a4a9ac8`）
 
 ### Q-ES-009　監修待ち
 
@@ -172,7 +172,7 @@
 
 - [この問題を監修する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-review.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20Q-ES-010&question_id=Q-ES-010&version=c4229ca27d)　（版 `c4229ca27d`）
 
-**[ここまでの 10 問（Q-ES-001〜Q-ES-010）をまとめて承認する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-batch-approve.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A6%E6%89%BF%E8%AA%8D%20Q-ES-001%E3%80%9CQ-ES-010&questions=Q-ES-001%201816111f69%0AQ-ES-002%206be18d3d8b%0AQ-ES-003%20d261a8fe8f%0AQ-ES-004%20097bffd824%0AQ-ES-005%20e2f0ea4215%0AQ-ES-006%201004e655be%0AQ-ES-007%20d32587bf98%0AQ-ES-008%2071db33415b%0AQ-ES-009%20fe3e57c8d0%0AQ-ES-010%20c4229ca27d)**
+**[ここまでの 10 問（Q-ES-001〜Q-ES-010）をまとめて承認する](https://github.com/hm-cmed/cleanroom-mcq/issues/new?template=question-batch-approve.yml&title=%5B%E7%9B%A3%E4%BF%AE%5D%20%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A6%E6%89%BF%E8%AA%8D%20Q-ES-001%E3%80%9CQ-ES-010&questions=Q-ES-001%201816111f69%0AQ-ES-002%206be18d3d8b%0AQ-ES-003%20d261a8fe8f%0AQ-ES-004%207ce7fc6c4d%0AQ-ES-005%20b2f82a7de8%0AQ-ES-006%201004e655be%0AQ-ES-007%20d32587bf98%0AQ-ES-008%20a65a4a9ac8%0AQ-ES-009%20fe3e57c8d0%0AQ-ES-010%20c4229ca27d)**
 
 ---
 
